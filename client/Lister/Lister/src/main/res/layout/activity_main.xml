@@ -17,21 +17,21 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Item 1" />
+        android:text="Item 2" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Item 1" />
+        android:text="Item 3" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Item 1" />
+        android:text="Item 4" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Item 1" />
+        android:text="Item 5" />
 
 </LinearLayout>
