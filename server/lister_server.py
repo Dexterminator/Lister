@@ -2,6 +2,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import threading
 import time
 import sys
+import MySQLdb
 
 HOST_NAME = 'localhost' 
 PORT = 8888
@@ -11,14 +12,25 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         request = self.path.split('/')
         userIP = self.address_string()
+        print "Request from " + userIP + "..."
 
         for word in request:
             print word
 
+        db = MySQLdb.connect(host="mysql-vt2013.csc.kth.se", user="dexteradmin", passwd="B3E2RaX5", db="dexter")
+
+        cur = db.cursor()
+        cur.execute("SELECT * FROM securities")
+
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
-        self.wfile.write("Hello server world!")
+
+        response = ""
+        for row in cur.fetchall():
+            response += row[1]
+            response += " "
+        self.wfile.write(response)
 
 
 def run_server(server):
