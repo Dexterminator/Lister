@@ -38,7 +38,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
 
         db = MySQLdb.connect(host="mysql-vt2013.csc.kth.se", user="dexteradmin", passwd="B3E2RaX5", db="dexter")
         cur = db.cursor()
-        cur.execute("SELECT * FROM securities")
+        cur.execute("SELECT * FROM securities WHERE name=%s", "Telia")
 
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
@@ -46,9 +46,11 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
 
         response = ""
         for row in cur.fetchall():
+            print row[1]
             response += row[1]
             response += " "
         #Print the response
+        cur.close()
         self.wfile.write(response)
 
 
