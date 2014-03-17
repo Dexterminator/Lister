@@ -13,7 +13,8 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/login_view"
+        layout="@layout/create_account_view"
         />
 
 </LinearLayout>
+
