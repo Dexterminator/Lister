@@ -7,5 +7,7 @@
     <string name="title_activity_create_account">CreateAccountActivity</string>
     <string name="title_activity_list_overview">ListOverviewActivity</string>
     <string name="title_activity_list_details">ListDetailsActivity</string>
+    <string name="title_activity_manage_shares">ManageSharesActivity</string>
+    <string name="title_activity_manage_collaborators">ManageCollaboratorsActivity</string>
 
 </resources>

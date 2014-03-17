@@ -28,6 +28,14 @@
             android:name="se.dxtr.lister.ListDetailsActivity"
             android:label="@string/title_activity_list_details" >
         </activity>
+        <activity
+            android:name="se.dxtr.lister.ManageSharesActivity"
+            android:label="@string/title_activity_manage_shares" >
+        </activity>
+        <activity
+            android:name="se.dxtr.lister.ManageCollaboratorsActivity"
+            android:label="@string/title_activity_manage_collaborators" >
+        </activity>
     </application>
 
 </manifest>
