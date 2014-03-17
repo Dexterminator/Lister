@@ -2,7 +2,7 @@ from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import threading
 import time
 import sys
-import MySQLdb
+import mysql.connector
 
 HOST_NAME = 'localhost'
 PORT = 8888
@@ -36,21 +36,31 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             print "Value: " + value
             print
 
-        db = MySQLdb.connect(host="mysql-vt2013.csc.kth.se", user="dexteradmin", passwd="B3E2RaX5", db="dexter")
-        cur = db.cursor()
-        cur.execute("SELECT * FROM securities WHERE name=%s", "Telia")
+        # db = MySQLdb.connect(host="mysql-vt2013.csc.kth.se", user="dexteradmin", passwd="B3E2RaX5", db="dexter")
+        cnx = mysql.connector.connect(user='dexteradmin', password='B3E2RaX5',
+                                      host='mysql-vt2013.csc.kth.se',
+                                      database='dexter')
+
+        cursor = cnx.cursor()
+        example_query = ("SELECT * FROM  lists "
+         "WHERE id=%s")
+
+        cursor.execute(example_query, '1')
 
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
 
         response = ""
-        for row in cur.fetchall():
-            print row[1]
-            response += row[1]
+        for (list_id, title) in cursor:
+            print list_id
+            print title
+            print
+            response += title
             response += " "
         #Print the response
-        cur.close()
+        cursor.close()
+        cnx.close()
         self.wfile.write(response)
 
 
