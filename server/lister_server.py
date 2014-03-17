@@ -45,7 +45,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         example_query = ("SELECT * FROM  lists "
          "WHERE id=%s")
 
-        cursor.execute(example_query, '1')
+        cursor.execute(example_query, (1))
 
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
