@@ -50,13 +50,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Login"
-            android:id="@+id/login-button" />
+            android:id="@+id/login_button" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create account"
-            android:id="@+id/create-account"
+            android:id="@+id/create_account"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
