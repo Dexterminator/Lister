@@ -51,6 +51,10 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             self.new_list_item(request_params)
         elif request_type == "set_checked_status":
             self.set_checked_status(request_params)
+        elif request_type == "create_account":
+            self.create_account(request_params)
+        elif request_type == "get_lists":
+            self.get_lists(request_params)
 
     def test_action(self, request_params):
         test_string = request_params['foo']
@@ -110,6 +114,8 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx.close()
         print "Inserted {}, {}, {} into list_items".format(list_id, content, False)
 
+    #Handle requests of the following type:
+    #set_checked_status/id=1&checked=false
     def set_checked_status(self, request_params):
         list_item_id = int(request_params['id'])
         checked = request_params['checked'] == 'true'
@@ -127,6 +133,66 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx.close()
 
         print "Set {} to {}".format(list_item_id, checked)
+
+    def create_account(self, request_params):
+        name = request_params['name']
+        password = request_params['password']
+
+        print "name: " + name
+        print "password: " + password
+        print
+
+        cnx = self.connect()
+        cursor = cnx.cursor()
+        create_account_query = ("INSERT INTO users (name, password)"
+            "VALUES (%s, %s)")
+        cursor.execute(create_account_query, (name, password))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        print "Inserted {}, {} into users".format(name, password)
+
+    def get_lists(self, request_params):
+        #{"lists": {"id": 1, "title": "Shopping", "last_change": date,
+        # "deadline": date, "items": [
+        # {"id": 1, "content": "Buy eggs", "checked": false}, 
+        # {"id": 2, "content": "Buy milk", "checked": true}]}}
+
+        user_id = request_params['id']
+
+        print "user id: " + user_id
+        print
+
+        cnx = self.connect()
+        cursor = cnx.cursor()
+        get_lists_query = ("SELECT id, title, author, last_change, deadline " 
+            "FROM lists WHERE id IN (SELECT list_id FROM collaborators WHERE uid = %s)")
+        cursor.execute(get_lists_query, (user_id))
+
+        lists = []
+        for (list_id, title, author, last_change, deadline) in cursor:
+            lists.append({"id": list_id, "title": title, "author": author,
+                "last_change": str(last_change), "deadline": str(deadline), "items": []})
+
+        get_list_items_query = ("SELECT id, content, checked FROM list_items WHERE list_id = %s")
+        for curr_list in lists:
+            list_id = str(curr_list['id'])
+            cursor.execute(get_list_items_query, (list_id)) 
+            for (item_id, content, checked) in cursor:
+                curr_list['items'].append({"id": item_id, "content": content, "checked": checked == 1})
+
+        for curr_list in lists:
+            print curr_list['title'], str(curr_list['deadline'])
+            for item in curr_list['items']:
+                print item['content'], item['checked']
+            print
+
+        cursor.close()
+        cnx.close()
+
+        response = json.dumps({"lists": lists})
+        self.respond(response)
 
     def connect(self):
         cnx = mysql.connector.connect(user='dexteradmin', password='B3E2RaX5',
