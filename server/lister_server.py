@@ -56,6 +56,10 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             self.get_lists(request_params)
         elif request_type == "login":
             self.login(request_params)
+        elif request_type == "remove_list_item":
+            self.remove_list_item(request_params)
+        elif request_type == "share":
+            self.share(request_params)
 
     def test_action(self, request_params):
         test_string = request_params['foo']
@@ -136,7 +140,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         print "Set {} to {}".format(list_item_id, checked)
 
     #Handle requests of the following type:
-    #host/get_lists/id=1
+    #host/create_account/name=hej&password=foo
     def create_account(self, request_params):
         name = request_params['name']
         password = request_params['password']
@@ -156,7 +160,8 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
 
         print "Inserted {}, {} into users".format(name, password)
 
-
+    #Handle requests of the following type:
+    #host/get_lists/id=1
     def get_lists(self, request_params):
         #{"lists": {"id": 1, "title": "Shopping", "last_change": date,
         # "deadline": date, "items": [
@@ -203,18 +208,60 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
     def login(self, request_params):
         name = request_params['name']
         password = request_params['password']
+        print "name: " + name
+        print "password: " + password
+        print
         login_query = "SELECT * FROM users WHERE name = %s AND password = %s"
         cnx = self.connect()
         cursor = cnx.cursor()
         cursor.execute(login_query, (name, password))
         if len(cursor.fetchall()) > 0:
+            print "Login successful"
             response = True
         else:
+            print "Login failed"
             response = False
         cursor.close()
         cnx.close()
         self.respond(response)
 
+    #Handle requests of the following type:
+    #host/remove_list_item/id=4
+    def remove_list_item(self, request_params):
+        list_item_id = request_params['id']
+        print "id: " + list_item_id
+        print
+
+        remove_item_query = "DELETE FROM list_items WHERE id = %s"
+        cnx = self.connect()
+        cursor = cnx.cursor()
+        cursor.execute(remove_item_query, (list_item_id,))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        print "Removed list item " + list_item_id
+        self.respond(True)
+
+    #Handle requests of the following type:
+    #host/share/uid=2&list_id=4
+    def share(self, request_params):
+        uid = request_params['uid']
+        list_id = request_params['list_id']
+        print "User id: " + uid
+        print "List id: " + list_id
+        print
+
+        share_query = "INSERT INTO collaborators (uid, list_id) VALUES (%s, %s)"
+        cnx = self.connect()
+        cursor = cnx.cursor()
+        cursor.execute(share_query, (uid, list_id))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        print "Inserted {}, {} into collaborators".format(uid, list_id)
+        self.respond(True)
+
+    #Connects to the database and returns the connection object
     def connect(self):
         cnx = mysql.connector.connect(user='dexteradmin', password='B3E2RaX5',
                                       host='mysql-vt2013.csc.kth.se',
