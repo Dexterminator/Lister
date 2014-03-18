@@ -24,6 +24,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
         </activity>
+
+        <activity
+            android:name="se.dxtr.lister.ListOverviewActivity"
+            android:label="@string/title_activity_list_overview" >
+        </activity>
+
         <activity
             android:name="se.dxtr.lister.ListDetailsActivity"
             android:label="@string/title_activity_list_details" >

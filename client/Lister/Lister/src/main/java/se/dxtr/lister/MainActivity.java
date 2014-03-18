@@ -1,18 +1,26 @@
 package se.dxtr.lister;
 
 import android.app.Activity;
-import android.app.Application;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import se.dxtr.lister.controller.LoginViewController;
+import se.dxtr.lister.view.LoginView;
 
 public class MainActivity extends Activity {
+    LoginView loginView;
+    LoginViewController controller;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_collaborators);
+
+        setContentView(R.layout.activity_main);
+
+        // Creating the menu header instance
+        loginView = new LoginView(findViewById(R.layout.login_view), this);
+        controller = new LoginViewController(loginView);
     }
 
 
