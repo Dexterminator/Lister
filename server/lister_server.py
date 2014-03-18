@@ -43,22 +43,6 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         elif request_type == "new_list":
             self.new_list(request_params)
 
-
-
-        # cursor = cnx.cursor()
-        # example_query = ("SELECT title, author FROM lists WHERE author=%s")
-
-        # cursor.execute(example_query, ('1'))
-
-        # response = ""
-        # for (title, author) in cursor:
-        #     response += title
-        #     response += " "
-        # #Print the response
-        # cursor.close()
-        # cnx.close()
-        # self.wfile.write(response)
-
     def test_action(self, request_params):
         test_string = request_params['foo']
         test_string2 = request_params['bar']
@@ -66,18 +50,25 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         print test_string2
         self.respond(test_string)
 
+    #Handle requests of the following type:
+    #host/new_list/title=Shopping&author=1&deadline=1395140712
     def new_list(self, request_params):
         title = request_params['title']
         author = request_params['author']
-        deadline = request_params['deadline']
         last_change = datetime.now()
+        if request_params['deadline'] == "":
+            deadline = None
+        else:
+            deadline = float(request_params['deadline'])
+            #TODO: handle this correclty
+            deadline = datetime.fromtimestamp(deadline/1000.0)
 
         cnx = self.connect()
         cursor = cnx.cursor()
         new_list_query = ("INSERT INTO lists (title, author, last_change, deadline)"
             "VALUES (%s, %s, %s, %s)")
 
-        cursor.execute(new_list_query, (title, author, last_change, None))
+        cursor.execute(new_list_query, (title, author, last_change, deadline))
         cnx.commit()
         cursor.close()
         cnx.close()
