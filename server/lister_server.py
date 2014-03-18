@@ -40,7 +40,6 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             key = key_and_value[0]
             value = key_and_value[1]
             request_params[key] = value
-            #Prepare key and value for use in database query here
 
         #Execute the method that corresponds to the request type
         if request_type == "test":
@@ -55,6 +54,8 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             self.create_account(request_params)
         elif request_type == "get_lists":
             self.get_lists(request_params)
+        elif request_type == "login":
+            self.login(request_params)
 
     def test_action(self, request_params):
         test_string = request_params['foo']
@@ -115,7 +116,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         print "Inserted {}, {}, {} into list_items".format(list_id, content, False)
 
     #Handle requests of the following type:
-    #set_checked_status/id=1&checked=false
+    #host/set_checked_status/id=1&checked=false
     def set_checked_status(self, request_params):
         list_item_id = int(request_params['id'])
         checked = request_params['checked'] == 'true'
@@ -134,6 +135,8 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
 
         print "Set {} to {}".format(list_item_id, checked)
 
+    #Handle requests of the following type:
+    #host/get_lists/id=1
     def create_account(self, request_params):
         name = request_params['name']
         password = request_params['password']
@@ -152,6 +155,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx.close()
 
         print "Inserted {}, {} into users".format(name, password)
+
 
     def get_lists(self, request_params):
         #{"lists": {"id": 1, "title": "Shopping", "last_change": date,
@@ -192,6 +196,23 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx.close()
 
         response = json.dumps({"lists": lists})
+        self.respond(response)
+
+    #Handle requests of the following type:
+    #host/login/name=Dexter&password=bananpaj
+    def login(self, request_params):
+        name = request_params['name']
+        password = request_params['password']
+        login_query = "SELECT * FROM users WHERE name = %s AND password = %s"
+        cnx = self.connect()
+        cursor = cnx.cursor()
+        cursor.execute(login_query, (name, password))
+        if len(cursor.fetchall()) > 0:
+            response = True
+        else:
+            response = False
+        cursor.close()
+        cnx.close()
         self.respond(response)
 
     def connect(self):
