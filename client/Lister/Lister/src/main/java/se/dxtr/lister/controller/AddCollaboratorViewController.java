@@ -18,10 +18,7 @@ public class AddCollaboratorViewController implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent;
-
-        intent = new Intent(view.activity, ManageCollaboratorsActivity.class);
-        view.activity.startActivity(intent);
+        view.activity.finish();
     }
 
 }
