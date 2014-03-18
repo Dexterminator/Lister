@@ -10,6 +10,7 @@ import urllib
 HOST_NAME = 'localhost'
 PORT = 8888
 
+
 #Handles the different requests from the client, and performs database queries
 class TodoRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -27,7 +28,6 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         print "Request from " + userIP + "..."
         print "Request type: " + request_type
         print
-
 
         #Find all parameters by splitting the third argument in URL on & character
         #host/type/param1=foo&param2=bar
@@ -76,7 +76,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         else:
             deadline = float(request_params['deadline'])
             #TODO: handle this correclty
-            deadline = datetime.fromtimestamp(deadline/1000.0)
+            deadline = datetime.fromtimestamp(deadline / 1000.0)
 
         print "title: " + title
         print "author: " + author
@@ -86,7 +86,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx = self.connect()
         cursor = cnx.cursor()
         new_list_query = ("INSERT INTO lists (title, author, last_change, deadline)"
-            "VALUES (%s, %s, %s, %s)")
+                          "VALUES (%s, %s, %s, %s)")
 
         cursor.execute(new_list_query, (title, author, last_change, deadline))
         cnx.commit()
@@ -107,7 +107,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cursor = cnx.cursor()
 
         new_list_item_query = ("INSERT INTO list_items (list_id, content, checked)"
-            "VALUES (%s, %s, %s)")
+                               "VALUES (%s, %s, %s)")
         cursor.execute(new_list_item_query, (list_id, content, False))
         cnx.commit()
         cursor.close()
@@ -126,7 +126,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx = self.connect()
         cursor = cnx.cursor()
 
-        set_checked_query = ("UPDATE list_items SET checked = %s WHERE id = %s")
+        set_checked_query = "UPDATE list_items SET checked = %s WHERE id = %s"
         cursor.execute(set_checked_query, (checked, list_item_id))
         cnx.commit()
         cursor.close()
@@ -145,7 +145,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx = self.connect()
         cursor = cnx.cursor()
         create_account_query = ("INSERT INTO users (name, password)"
-            "VALUES (%s, %s)")
+                                "VALUES (%s, %s)")
         cursor.execute(create_account_query, (name, password))
         cnx.commit()
         cursor.close()
@@ -166,19 +166,19 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
 
         cnx = self.connect()
         cursor = cnx.cursor()
-        get_lists_query = ("SELECT id, title, author, last_change, deadline " 
-            "FROM lists WHERE id IN (SELECT list_id FROM collaborators WHERE uid = %s)")
-        cursor.execute(get_lists_query, (user_id))
+        get_lists_query = ("SELECT id, title, author, last_change, deadline "
+                           "FROM lists WHERE id IN (SELECT list_id FROM collaborators WHERE uid = %s)")
+        cursor.execute(get_lists_query, user_id)
 
         lists = []
         for (list_id, title, author, last_change, deadline) in cursor:
             lists.append({"id": list_id, "title": title, "author": author,
-                "last_change": str(last_change), "deadline": str(deadline), "items": []})
+                          "last_change": str(last_change), "deadline": str(deadline), "items": []})
 
-        get_list_items_query = ("SELECT id, content, checked FROM list_items WHERE list_id = %s")
+        get_list_items_query = "SELECT id, content, checked FROM list_items WHERE list_id = %s"
         for curr_list in lists:
             list_id = str(curr_list['id'])
-            cursor.execute(get_list_items_query, (list_id)) 
+            cursor.execute(get_list_items_query, list_id)
             for (item_id, content, checked) in cursor:
                 curr_list['items'].append({"id": item_id, "content": content, "checked": checked == 1})
 
@@ -205,6 +205,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
         self.wfile.write(response)
+
 
 def run_server(server):
     server.serve_forever()
