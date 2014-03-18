@@ -17,14 +17,15 @@
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/overview_element_id">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Todo"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/list_1" />
+                android:id="@+id/list_id" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -35,171 +36,8 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Item 1" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 2" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="9dp"
-                android:text=". . ."/>
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Todo"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/list_1" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="55dp"
-                android:layout_height="1dp"
-                android:background="@color/red" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 1" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 2" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="9dp"
-                android:text=". . ."/>
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Todo"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/list_1" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="55dp"
-                android:layout_height="1dp"
-                android:background="@color/red" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 1" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 2" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="9dp"
-                android:text=". . ."/>
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Todo"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/list_1" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="55dp"
-                android:layout_height="1dp"
-                android:background="@color/red" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 1" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 2" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 3" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="9dp"
-                android:text=". . ."/>
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/gray" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Todo"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/list_1" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="55dp"
-                android:layout_height="1dp"
-                android:background="@color/red" />
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Item 1" />
+                android:text="Item 1"
+                android:id="@+id/overview_checkbox1"/>
 
             <CheckBox
                 android:layout_width="wrap_content"
