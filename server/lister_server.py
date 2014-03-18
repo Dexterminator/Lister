@@ -1,9 +1,11 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
 import threading
 import time
 import sys
 import mysql.connector
+import json
+import urllib
 
 HOST_NAME = 'localhost'
 PORT = 8888
@@ -24,6 +26,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         request_type = request[1]
         print "Request from " + userIP + "..."
         print "Request type: " + request_type
+        print
 
 
         #Find all parameters by splitting the third argument in URL on & character
@@ -32,23 +35,31 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         request_params_strings = request[2].split("&")
         request_params = {}
         for param in request_params_strings:
+            param = urllib.unquote(param).decode('utf8')
             key_and_value = param.split("=")
             key = key_and_value[0]
             value = key_and_value[1]
             request_params[key] = value
             #Prepare key and value for use in database query here
 
+        #Execute the method that corresponds to the request type
         if request_type == "test":
             self.test_action(request_params)
         elif request_type == "new_list":
             self.new_list(request_params)
+        elif request_type == "new_list_item":
+            self.new_list_item(request_params)
+        elif request_type == "set_checked_status":
+            self.set_checked_status(request_params)
 
     def test_action(self, request_params):
         test_string = request_params['foo']
         test_string2 = request_params['bar']
         print test_string
         print test_string2
-        self.respond(test_string)
+        response = json.dumps([{"checked": False, "content": "eggs"}, {"checked": True, "content": "wat"}])
+        print response
+        self.respond(response)
 
     #Handle requests of the following type:
     #host/new_list/title=Shopping&author=1&deadline=1395140712
@@ -63,6 +74,11 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             #TODO: handle this correclty
             deadline = datetime.fromtimestamp(deadline/1000.0)
 
+        print "title: " + title
+        print "author: " + author
+        print "last_change: " + str(last_change)
+        print "deadline: " + str(deadline)
+        print
         cnx = self.connect()
         cursor = cnx.cursor()
         new_list_query = ("INSERT INTO lists (title, author, last_change, deadline)"
@@ -72,6 +88,45 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx.commit()
         cursor.close()
         cnx.close()
+        print "Inserted {}, {}, {}, {} into lists.".format(title, author, last_change, deadline)
+
+    #Handle requests of the following type:
+    #host/new_list_item/list_id=1&content=buy%20eggs
+    def new_list_item(self, request_params):
+        list_id = request_params['list_id']
+        content = request_params['content']
+        print "list_id: " + list_id
+        print "content: " + content
+        print
+
+        cnx = self.connect()
+        cursor = cnx.cursor()
+
+        new_list_item_query = ("INSERT INTO list_items (list_id, content, checked)"
+            "VALUES (%s, %s, %s)")
+        cursor.execute(new_list_item_query, (list_id, content, False))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+        print "Inserted {}, {}, {} into list_items".format(list_id, content, False)
+
+    def set_checked_status(self, request_params):
+        list_item_id = int(request_params['id'])
+        checked = request_params['checked'] == 'true'
+        print "id: " + str(list_item_id)
+        print "checked: " + str(checked)
+        print
+
+        cnx = self.connect()
+        cursor = cnx.cursor()
+
+        set_checked_query = ("UPDATE list_items SET checked = %s WHERE id = %s")
+        cursor.execute(set_checked_query, (checked, list_item_id))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+        print "Set {} to {}".format(list_item_id, checked)
 
     def connect(self):
         cnx = mysql.connector.connect(user='dexteradmin', password='B3E2RaX5',
@@ -84,8 +139,6 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
         self.wfile.write(response)
-
-
 
 def run_server(server):
     server.serve_forever()

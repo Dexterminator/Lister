@@ -24,10 +24,11 @@ create table lists (
 );
 
 create table list_items (
+	id int NOT NULL AUTO_INCREMENT,
 	list_id int NOT NULL,
 	content varchar(64) NOT NULL,
 	checked boolean NOT NULL,
-	FOREIGN KEY (list_id) REFERENCES lists (id)
+	PRIMARY KEY (id)
 );
 
 create table collaborators (
