@@ -11,12 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import se.dxtr.lister.controller.CreateAccountViewController;
+import se.dxtr.lister.view.CreateAccountView;
+
 public class CreateAccountActivity extends Activity {
+    CreateAccountView createAccountView;
+    CreateAccountViewController createAccountViewController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+
+        // Creating the menu header instance
+        createAccountView = new CreateAccountView(findViewById(R.layout.create_account_view), this);
+        createAccountViewController = new CreateAccountViewController(createAccountView);
     }
 
 

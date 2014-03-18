@@ -21,23 +21,5 @@
         layout="@layout/list_overview_element"
         />
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/list_overview_element"
-        />
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/list_overview_element"
-        />
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/list_overview_element"
-        />
-
 </LinearLayout>
 
