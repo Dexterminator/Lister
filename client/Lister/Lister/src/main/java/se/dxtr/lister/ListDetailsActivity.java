@@ -1,22 +1,26 @@
 package se.dxtr.lister;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
+
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+
+import se.dxtr.lister.controller.ListDetailsViewController;
+import se.dxtr.lister.view.ListDetailsView;
 
 public class ListDetailsActivity extends Activity {
+    ListDetailsView listDetailsView;
+    ListDetailsViewController listDetailsViewController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_details);
+
+        // Creating the list details instance
+        listDetailsView = new ListDetailsView(findViewById(R.layout.activity_list_details), this);
+        listDetailsViewController = new ListDetailsViewController(listDetailsView);
     }
 
 

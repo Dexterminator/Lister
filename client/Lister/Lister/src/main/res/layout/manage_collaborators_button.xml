@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add collaborator"
-        android:id="@+id/share_button"
+        android:id="@+id/manage_collaborators_button"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="85dp" />
 

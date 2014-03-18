@@ -3,23 +3,21 @@ package se.dxtr.lister.view;
 import se.dxtr.lister.R;
 import android.app.Activity;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.Button;
 
-
-public class ListOverviewView {
+public class AddCollaboratorView {
     View view;
     public final Activity activity;
-    public LinearLayout overviewElementId;
+    public Button addCollaboratorButton;
 
-    public ListOverviewView(View view, final Activity activity) {
+    public AddCollaboratorView(View view, final Activity activity) {
 
         // store in the class the reference to the Android View
         this.view = view;
         this.activity = activity;
 
         // Setup the rest of the view layout
-
-        overviewElementId = (LinearLayout) activity.findViewById(R.id.overview_element_id);
+        addCollaboratorButton = (Button) activity.findViewById(R.id.add_collaborator_button);
     }
 
 }

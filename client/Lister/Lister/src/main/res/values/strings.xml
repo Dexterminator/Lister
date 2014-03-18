@@ -9,5 +9,6 @@
     <string name="title_activity_list_details">ListDetailsActivity</string>
     <string name="title_activity_manage_shares">ManageSharesActivity</string>
     <string name="title_activity_manage_collaborators">ManageCollaboratorsActivity</string>
+    <string name="title_activity_add_collaborator">AddCollaborator</string>
 
 </resources>

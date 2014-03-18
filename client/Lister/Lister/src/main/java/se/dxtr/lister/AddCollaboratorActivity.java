@@ -1,38 +1,31 @@
 package se.dxtr.lister;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import se.dxtr.lister.view.AddCollaboratorView;
+import se.dxtr.lister.controller.AddCollaboratorViewController;
 
-import se.dxtr.lister.controller.ManageCollaboratorsViewController;
-import se.dxtr.lister.view.ManageCollaboratorsView;
 
-public class ManageCollaboratorsActivity extends Activity {
-    ManageCollaboratorsView manageCollaboratorsView;
-    ManageCollaboratorsViewController manageCollaboratorsViewController;
+public class AddCollaboratorActivity extends Activity {
+    AddCollaboratorView addCollaboratorView;
+    AddCollaboratorViewController addCollaboratorViewController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_collaborators);
+        setContentView(R.layout.activity_add_collaborator);
 
-        manageCollaboratorsView = new ManageCollaboratorsView(findViewById(R.layout.activity_manage_collaborators), this);
-        manageCollaboratorsViewController = new ManageCollaboratorsViewController(manageCollaboratorsView);
+        addCollaboratorView = new AddCollaboratorView(findViewById(R.layout.activity_add_collaborator), this);
+        addCollaboratorViewController = new AddCollaboratorViewController(addCollaboratorView);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.manage_collaborators, menu);
+        getMenuInflater().inflate(R.menu.add_collaborator, menu);
         return true;
     }
 

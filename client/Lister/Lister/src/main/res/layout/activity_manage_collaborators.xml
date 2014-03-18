@@ -22,6 +22,6 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        layout="@layout/add_collaborator_button" />
+        layout="@layout/manage_collaborators_button" />
 
 </LinearLayout>
