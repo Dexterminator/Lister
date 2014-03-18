@@ -19,7 +19,7 @@ create table lists (
     title varchar(64) NOT NULL,
     author varchar(64) NOT NULL,
     last_change timestamp,
-    deadline timestamp,
+    deadline timestamp NULL DEFAULT NULL,
 	PRIMARY KEY (id)
 );
 

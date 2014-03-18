@@ -1,4 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
+from datetime import date, datetime, timedelta
 import threading
 import time
 import sys
@@ -24,44 +25,75 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         print "Request from " + userIP + "..."
         print "Request type: " + request_type
 
+
         #Find all parameters by splitting the third argument in URL on & character
         #host/type/param1=foo&param2=bar
-        request_params = request[2].split("&")
-        for param in request_params:
+        #Put all keys and values in a python dictionary for easy access
+        request_params_strings = request[2].split("&")
+        request_params = {}
+        for param in request_params_strings:
             key_and_value = param.split("=")
             key = key_and_value[0]
             value = key_and_value[1]
+            request_params[key] = value
             #Prepare key and value for use in database query here
-            print "Key: " + key
-            print "Value: " + value
-            print
 
-        # db = MySQLdb.connect(host="mysql-vt2013.csc.kth.se", user="dexteradmin", passwd="B3E2RaX5", db="dexter")
+        if request_type == "test":
+            self.test_action(request_params)
+        elif request_type == "new_list":
+            self.new_list(request_params)
+
+
+
+        # cursor = cnx.cursor()
+        # example_query = ("SELECT title, author FROM lists WHERE author=%s")
+
+        # cursor.execute(example_query, ('1'))
+
+        # response = ""
+        # for (title, author) in cursor:
+        #     response += title
+        #     response += " "
+        # #Print the response
+        # cursor.close()
+        # cnx.close()
+        # self.wfile.write(response)
+
+    def test_action(self, request_params):
+        test_string = request_params['foo']
+        test_string2 = request_params['bar']
+        print test_string
+        print test_string2
+        self.respond(test_string)
+
+    def new_list(self, request_params):
+        title = request_params['title']
+        author = request_params['author']
+        deadline = request_params['deadline']
+        last_change = datetime.now()
+
+        cnx = self.connect()
+        cursor = cnx.cursor()
+        new_list_query = ("INSERT INTO lists (title, author, last_change, deadline)"
+            "VALUES (%s, %s, %s, %s)")
+
+        cursor.execute(new_list_query, (title, author, last_change, None))
+        cnx.commit()
+        cursor.close()
+        cnx.close()
+
+    def connect(self):
         cnx = mysql.connector.connect(user='dexteradmin', password='B3E2RaX5',
                                       host='mysql-vt2013.csc.kth.se',
                                       database='dexter')
+        return cnx
 
-        cursor = cnx.cursor()
-        example_query = ("SELECT * FROM  lists "
-         "WHERE id=%s")
-
-        cursor.execute(example_query, (1))
-
+    def respond(self, response):
         self.send_response(200)
         self.send_header('Content-Type', 'application/json')
         self.end_headers()
-
-        response = ""
-        for (list_id, title) in cursor:
-            print list_id
-            print title
-            print
-            response += title
-            response += " "
-        #Print the response
-        cursor.close()
-        cnx.close()
         self.wfile.write(response)
+
 
 
 def run_server(server):
