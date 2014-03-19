@@ -28,7 +28,7 @@ public class LoginViewController implements OnClickListener {
             case R.id.login_button:
                 intent = new Intent(view.activity, ListOverviewActivity.class);
                 model.testRequest();
-//                view.activity.startActivity(intent);
+                view.activity.startActivity(intent);
                 break;
             case R.id.create_account:
                 intent = new Intent(view.activity, CreateAccountActivity.class);
