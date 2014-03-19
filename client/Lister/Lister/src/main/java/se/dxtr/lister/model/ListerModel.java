@@ -3,6 +3,8 @@ package se.dxtr.lister.model;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,9 +37,9 @@ public class ListerModel extends Observable {
             InputStream is = null;
             URL host = null;
             try {
-//                host = new URL("http://192.168.1.36:8888/get_lists/id=1");
-                host = new URL("http://192.168.1.36:8888/" + "new_list/" + "author=" + author
-                        + "&title=" + title + "&deadline=" + deadline);
+                host = new URL("http://192.168.1.36:8888/get_lists/id=1");
+//                host = new URL("http://192.168.1.36:8888/" + "new_list/" + "author=" + author
+//                        + "&title=" + title + "&deadline=" + deadline);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -66,7 +68,6 @@ public class ListerModel extends Observable {
                     sb.append(line + "\n");
                 }
                 br.close();
-                Log.d("testthing", sb.toString());
 
                 return sb.toString();
             } catch (ProtocolException e) {
@@ -80,6 +81,10 @@ public class ListerModel extends Observable {
         @Override
         protected void onPostExecute(String result) {
             Log.d("Result", result);
+            Gson gson = new Gson();
+            ListData listData = gson.fromJson(result, ListData.class);
+            Log.d("listdatatest", listData.getTodoListDatas()[0].toString());
+            Log.d("listdatatest", listData.getTodoListDatas()[1].toString());
         }
     }
 }
