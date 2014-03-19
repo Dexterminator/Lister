@@ -6,9 +6,8 @@ package se.dxtr.lister.model;
 public class User {
     private int id;
     private String name;
-    private String password;
 
-    public User(int id, String name, String password) {
+    public User(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -19,5 +18,13 @@ public class User {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

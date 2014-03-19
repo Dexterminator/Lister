@@ -4,24 +4,14 @@ package se.dxtr.lister.model;
  * Created by Dexter on 2014-03-19.
  */
 public class ListItem {
-    private int listID;
     private int itemID;
     private boolean checked;
     private String content;
 
-    public ListItem(int listID, int itemID, boolean checked, String content) {
-        this.listID = listID;
+    public ListItem(int itemID, boolean checked, String content) {
         this.itemID = itemID;
         this.checked = checked;
         this.content = content;
-    }
-
-    public int getListID() {
-        return listID;
-    }
-
-    public void setListID(int listID) {
-        this.listID = listID;
     }
 
     public int getItemID() {
@@ -46,5 +36,14 @@ public class ListItem {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "ListItem{" +
+                "itemID=" + itemID +
+                ", checked=" + checked +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

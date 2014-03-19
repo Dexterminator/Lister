@@ -68,6 +68,8 @@ public class ListData {
         private String content;
         private boolean checked;
         private int id;
+        @SerializedName("list_id")
+        private int listId;
 
         public String getContent() {
             return content;
