@@ -190,10 +190,13 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cursor.execute(get_lists_query, user_id)
 
         lists = []
+
+        #Get id, title, author, last change and deadline for every list
         for (list_id, title, author, last_change, deadline) in cursor:
             lists.append({"id": list_id, "title": title, "author": author,
-                          "last_change": str(last_change), "deadline": str(deadline), "items": []})
+                          "last_change": str(last_change), "deadline": str(deadline), "items": [], "collaborators": []})
 
+        #Get all list items for each list
         get_list_items_query = "SELECT id, content, checked FROM list_items WHERE list_id = %s"
         for curr_list in lists:
             list_id = str(curr_list['id'])
@@ -201,6 +204,16 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             for (item_id, content, checked) in cursor:
                 curr_list['items'].append({"id": item_id, "content": content, "checked": checked == 1})
 
+        get_collaborators_query = "SELECT id, name, date_created FROM users JOIN collaborators" \
+                                  " ON users.id = collaborators.uid WHERE list_id = %s"
+        #Get all collaborators for each list
+        for curr_list in lists:
+            list_id = str(curr_list['id'])
+            cursor.execute(get_collaborators_query, (list_id,))
+            for (user_id, name, date_created) in cursor:
+                curr_list['collaborators'].append({"id": user_id, "name": name, "date_created": str(date_created)})
+
+        #Print all the lists for the user
         for curr_list in lists:
             print curr_list['title'], str(curr_list['deadline'])
             for item in curr_list['items']:
