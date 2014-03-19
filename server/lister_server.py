@@ -42,9 +42,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             request_params[key] = value
 
         #Execute the method that corresponds to the request type
-        if request_type == "test":
-            self.test_action(request_params)
-        elif request_type == "new_list":
+        if request_type == "new_list":
             self.new_list(request_params)
         elif request_type == "new_list_item":
             self.new_list_item(request_params)
@@ -60,15 +58,6 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
             self.remove_list_item(request_params)
         elif request_type == "share":
             self.share(request_params)
-
-    def test_action(self, request_params):
-        test_string = request_params['foo']
-        test_string2 = request_params['bar']
-        print test_string
-        print test_string2
-        response = json.dumps([{"checked": False, "content": "eggs"}, {"checked": True, "content": "wat"}])
-        print response
-        self.respond(response)
 
     #Handle requests of the following type:
     #host/new_list/title=Shopping&author=1&deadline=1395140712
@@ -98,6 +87,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cursor.close()
         cnx.close()
         print "Inserted {}, {}, {}, {} into lists.".format(title, author, last_change, deadline)
+        self.respond(True)
 
     #Handle requests of the following type:
     #host/new_list_item/list_id=1&content=buy%20eggs
@@ -118,6 +108,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cursor.close()
         cnx.close()
         print "Inserted {}, {}, {} into list_items".format(list_id, content, False)
+        self.respond(True)
 
     #Handle requests of the following type:
     #host/set_checked_status/id=1&checked=false
@@ -138,6 +129,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx.close()
 
         print "Set {} to {}".format(list_item_id, checked)
+        self.respond(True)
 
     #Handle requests of the following type:
     #host/create_account/name=hej&password=foo
@@ -159,6 +151,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx.close()
 
         print "Inserted {}, {} into users".format(name, password)
+        self.respond(True)
 
     #Handle requests of the following type:
     #host/get_lists/id=1
