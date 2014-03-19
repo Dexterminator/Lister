@@ -1,11 +1,13 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-from datetime import date, datetime
+from datetime import datetime
 import threading
 import time
 import sys
-import mysql.connector
 import json
 import urllib
+
+import mysql.connector
+
 
 HOST_NAME = 'localhost'
 PORT = 8888
@@ -81,8 +83,11 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cursor = cnx.cursor()
         new_list_query = ("INSERT INTO lists (title, author, last_change, deadline)"
                           "VALUES (%s, %s, %s, %s)")
-
         cursor.execute(new_list_query, (title, author, last_change, deadline))
+
+        collaborator_query = "INSERT INTO collaborators (uid, list_id) VALUES (%s, LAST_INSERT_ID())"
+        cursor.execute(collaborator_query, author)
+
         cnx.commit()
         cursor.close()
         cnx.close()
@@ -104,6 +109,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         new_list_item_query = ("INSERT INTO list_items (list_id, content, checked)"
                                "VALUES (%s, %s, %s)")
         cursor.execute(new_list_item_query, (list_id, content, False))
+
         cnx.commit()
         cursor.close()
         cnx.close()
