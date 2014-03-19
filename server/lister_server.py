@@ -9,8 +9,19 @@ import urllib
 import mysql.connector
 
 
-HOST_NAME = 'localhost'
+HOST_NAME = '0.0.0.0'
 PORT = 8888
+
+
+#Hack to speed up
+def _bare_address_string(self):
+    host, port = self.client_address[:2]
+    return '%s' % host
+
+
+BaseHTTPRequestHandler.address_string = \
+    _bare_address_string
+#End hack
 
 
 #Handles the different requests from the client, and performs database queries
@@ -186,7 +197,7 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         get_list_items_query = "SELECT id, content, checked FROM list_items WHERE list_id = %s"
         for curr_list in lists:
             list_id = str(curr_list['id'])
-            cursor.execute(get_list_items_query, list_id)
+            cursor.execute(get_list_items_query, (list_id,))
             for (item_id, content, checked) in cursor:
                 curr_list['items'].append({"id": item_id, "content": content, "checked": checked == 1})
 

@@ -5,22 +5,28 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.List;
+
 import se.dxtr.lister.controller.LoginViewController;
+import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.view.LoginView;
 
 public class MainActivity extends Activity {
     LoginView loginView;
     LoginViewController controller;
+    ListerModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        model = ((ListerApplication) this.getApplication()).getModel();
+
         setContentView(R.layout.activity_main);
 
         // Creating the login instance
         loginView = new LoginView(findViewById(R.layout.login_view), this);
-        controller = new LoginViewController(loginView);
+        controller = new LoginViewController(loginView, model);
     }
 
 
