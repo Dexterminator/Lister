@@ -121,6 +121,9 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
                                "VALUES (%s, %s, %s)")
         cursor.execute(new_list_item_query, (list_id, content, False))
 
+        last_change_query = "UPDATE lists SET last_change = NULL WHERE id = %s"
+        cursor.execute(last_change_query, (list_id,))
+
         cnx.commit()
         cursor.close()
         cnx.close()

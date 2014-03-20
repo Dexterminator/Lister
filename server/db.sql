@@ -77,3 +77,4 @@ INSERT INTO collaborators (uid, list_id, date_created) VALUES (1, 2, '2014-01-01
 INSERT INTO collaborators (uid, list_id, date_created) VALUES (1, 3, '2014-01-01 00:00:01');
 INSERT INTO collaborators (uid, list_id, date_created) VALUES (2, 4, '2014-01-01 00:00:01');
 INSERT INTO collaborators (uid, list_id, date_created) VALUES (3, 5, '2014-01-01 00:00:01');
+INSERT INTO collaborators (uid, list_id, date_created) VALUES (1 5, '2014-01-01 00:00:01');
