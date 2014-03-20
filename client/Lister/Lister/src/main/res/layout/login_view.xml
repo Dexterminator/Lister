@@ -53,6 +53,8 @@
             android:id="@+id/login_button" />
 
         <TextView
+            android:paddingTop="20dp"
+            android:textColor="@color/logo_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Create account"
