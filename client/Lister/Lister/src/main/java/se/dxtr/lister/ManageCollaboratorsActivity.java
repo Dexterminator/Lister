@@ -25,7 +25,6 @@ public class ManageCollaboratorsActivity extends Activity {
         manageCollaboratorsViewController = new ManageCollaboratorsViewController(manageCollaboratorsView);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         

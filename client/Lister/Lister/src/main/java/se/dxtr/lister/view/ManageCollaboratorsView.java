@@ -15,13 +15,14 @@ public class ManageCollaboratorsView {
     View view;
     public final Activity activity;
     public Button manageCollaboratorsButton;
+    public int id;
 
     public ManageCollaboratorsView(View view, ListerModel model, final Activity activity) {
 
         // store in the class the reference to the Android View
         this.view = view;
         this.activity = activity;
-        int id = 1;
+        id = 1;
         TodoList todoList = model.getTodoLists().get(3);
         manageCollaboratorsButton = (Button) activity.findViewById(R.id.manage_collaborators_button);
 
