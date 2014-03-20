@@ -30,10 +30,10 @@ public class AddCollaboratorViewController implements OnClickListener {
     @Override
     public void onClick(View v) {
         username = view.usernameField.getText().toString();
-        new addCollaboratorTask().execute(username);
+        new AddCollaboratorTask().execute(username);
     }
 
-    private class addCollaboratorTask extends AsyncTask<String, Void, String> {
+    private class AddCollaboratorTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {

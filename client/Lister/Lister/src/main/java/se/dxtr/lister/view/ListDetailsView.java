@@ -9,7 +9,9 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import se.dxtr.lister.R;
 import se.dxtr.lister.controller.ListOverviewViewController;
@@ -23,6 +25,7 @@ public class ListDetailsView {
     public ListerModel model;
     public Button shareButton;
     public int id;
+    public Map<CheckBox, Integer> listElements;
 
     public ListDetailsView(View view, ListerModel model, final Activity activity) {
 
@@ -30,6 +33,7 @@ public class ListDetailsView {
         this.view = view;
         this.model = model;
         this.activity = activity;
+        listElements = new HashMap<CheckBox, Integer>();
         Intent intent = activity.getIntent();
         id = intent.getIntExtra(ListOverviewViewController.LIST_ID, 0);
         Log.d("Test detailview id", String.valueOf(id));
@@ -61,6 +65,7 @@ public class ListDetailsView {
             checkBox.setText(listItem.getContent());
             checkBox.setChecked(listItem.isChecked());
             itemsContainer.addView(checkBox);
+            listElements.put(checkBox, listItem.getItemID());
         }
 
         LinearLayout listDetailsBottom = (LinearLayout) View.inflate(activity.getBaseContext(),
