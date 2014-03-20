@@ -1,18 +1,7 @@
 package se.dxtr.lister.model;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.gson.Gson;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -32,6 +21,7 @@ public class ListerModel extends Observable {
     }
 
     public void loadListData(ListData listData) {
+        todoLists.clear();
         for (ListData.TodoListData data: listData.getTodoListDatas()){
             TodoList todoList = new TodoList(data.getId(), data.getTitle(), data.getAuthor(),
                     data.getDeadline(), data.getLastChange());
@@ -50,6 +40,10 @@ public class ListerModel extends Observable {
         for (TodoList todoList: getTodoLists()) {
             Log.d("Test lists", todoList.toString());
         }
+    }
+
+    public void addTodoList(TodoList todoList){
+        todoLists.add(todoList);
     }
 
 }
