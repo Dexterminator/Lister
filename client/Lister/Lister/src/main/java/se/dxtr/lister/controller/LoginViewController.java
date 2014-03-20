@@ -63,8 +63,9 @@ public class LoginViewController implements OnClickListener {
     public String validateLogin(String name, String password) {
         URL host = null;
         InputStream is = null;
+        String hoster = view.activity.getString(R.string.host);
         try {
-            host = new URL("http://130.229.174.119:8888/login/name=" + name + "&password=" +password);
+            host = new URL(view.activity.getString(R.string.host) + "login/name=" + name + "&password=" +password);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -131,7 +132,7 @@ public class LoginViewController implements OnClickListener {
         URL host = null;
         InputStream is = null;
         try {
-            host = new URL("http://130.229.174.119:8888/get_lists/id="+uid);
+            host = new URL(view.activity.getString(R.string.host) + "get_lists/id="+uid);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

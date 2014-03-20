@@ -6,19 +6,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import se.dxtr.lister.controller.ListOverviewViewController;
+import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.view.ListOverviewView;
 
 public class ListOverviewActivity extends Activity {
     ListOverviewView listOverviewView;
     ListOverviewViewController listOverviewViewController;
+    ListerModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_overview);
+        model = ((ListerApplication) this.getApplication()).getModel();
 
         // Creating the list overview instance
-        listOverviewView = new ListOverviewView(findViewById(R.layout.activity_list_overview), this);
+        listOverviewView = new ListOverviewView(findViewById(R.layout.activity_list_overview), model, this);
         listOverviewViewController = new ListOverviewViewController(listOverviewView);
     }
 

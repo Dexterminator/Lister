@@ -13,7 +13,7 @@ public class ListOverviewViewController implements OnClickListener {
     public ListOverviewViewController(ListOverviewView view) {
         this.view = view;
 
-        view.overviewElementId.setOnClickListener(this);
+        view.overviewElement.setOnClickListener(this);
     }
 
     @Override
