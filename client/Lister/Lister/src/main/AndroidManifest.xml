@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="se.dxtr.lister" >
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="se.dxtr.lister.ListerApplication"
@@ -11,9 +11,9 @@
         android:label=""
         android:theme="@style/AppTheme" >
         <activity
-            android:screenOrientation="portrait"
             android:name="se.dxtr.lister.MainActivity"
-            android:label="Lister" >
+            android:label="Lister"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,45 +21,49 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="se.dxtr.lister.CreateAccountActivity"
             android:label="Create account"
-            android:parentActivityName="se.dxtr.lister.MainActivity" >
+            android:parentActivityName="se.dxtr.lister.MainActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="se.dxtr.lister.ListOverviewActivity"
-            android:label="" >
+            android:label=""
+            android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="se.dxtr.lister.ListDetailsActivity"
             android:label=""
-            android:parentActivityName="se.dxtr.lister.ListOverviewActivity">
+            android:parentActivityName="se.dxtr.lister.ListOverviewActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ListOverViewActivity" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="se.dxtr.lister.ManageCollaboratorsActivity"
             android:label=""
-            android:parentActivityName="se.dxtr.lister.ListDetailsActivity">
+            android:parentActivityName="se.dxtr.lister.ListDetailsActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ListDetailsActivity" />
         </activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".AddCollaboratorActivity"
+            android:name="se.dxtr.lister.AddCollaboratorActivity"
             android:label=""
-            android:parentActivityName="se.dxtr.lister.ManageCollaboratorsActivity">
+            android:parentActivityName="se.dxtr.lister.ManageCollaboratorsActivity"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ManageCollaboratorsActivity" />
+        </activity>
+        <activity
+            android:name="se.dxtr.lister.AddListActivity"
+            android:label="@string/title_activity_add_list" >
         </activity>
     </application>
 

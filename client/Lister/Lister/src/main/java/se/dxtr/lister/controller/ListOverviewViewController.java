@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
+import se.dxtr.lister.AddListActivity;
 import se.dxtr.lister.ListDetailsActivity;
+import se.dxtr.lister.R;
 import se.dxtr.lister.view.ListOverviewView;
 
 public class ListOverviewViewController implements OnClickListener {
@@ -21,17 +23,22 @@ public class ListOverviewViewController implements OnClickListener {
             element.setOnClickListener(this);
 
         }
-//        view.overviewElement.setOnClickListener(this);
+        view.newListButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         Intent intent;
-        int id = view.overviewElements.get(v);
-        Log.d("list id", String.valueOf(id));
-        intent = new Intent(view.activity, ListDetailsActivity.class);
-        intent.putExtra(LIST_ID, id);
-        view.activity.startActivity(intent);
+        if (v.getId() == R.id.new_list_button) {
+            intent = new Intent(view.activity, AddListActivity.class);
+            view.activity.startActivity(intent);
+        } else {
+            int id = view.overviewElements.get(v);
+            Log.d("list id", String.valueOf(id));
+            intent = new Intent(view.activity, ListDetailsActivity.class);
+            intent.putExtra(LIST_ID, id);
+            view.activity.startActivity(intent);
+        }
     }
 
 }
