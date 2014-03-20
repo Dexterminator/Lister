@@ -6,7 +6,9 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import se.dxtr.lister.R;
 import se.dxtr.lister.model.ListItem;
@@ -17,6 +19,7 @@ public class ListOverviewView {
     View view;
     ListerModel model;
     public final Activity activity;
+    public Map<LinearLayout, Integer> overviewElements;
 
     public ListOverviewView(View view, ListerModel model, final Activity activity) {
 
@@ -24,6 +27,7 @@ public class ListOverviewView {
         this.view = view;
         this.activity = activity;
         this.model = model;
+        this.overviewElements = new HashMap<LinearLayout, Integer>();
 
         // Setup the rest of the view layout
         List<TodoList> todoLists = model.getTodoLists();
@@ -47,6 +51,7 @@ public class ListOverviewView {
                 checkBox.setEnabled(false);
                 itemCount++;
             }
+            overviewElements.put(overviewElement, todoList.getId());
         }
 
     }
