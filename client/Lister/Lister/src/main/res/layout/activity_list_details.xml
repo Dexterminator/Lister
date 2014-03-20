@@ -12,17 +12,7 @@
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        layout="@layout/list_details_header"
+        layout="@layout/list_details_view"
         />
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/list_element"/>
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        layout="@layout/list_details_bottom" />
 
 </LinearLayout>

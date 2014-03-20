@@ -7,19 +7,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import se.dxtr.lister.controller.ListDetailsViewController;
+import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.view.ListDetailsView;
 
 public class ListDetailsActivity extends Activity {
     ListDetailsView listDetailsView;
     ListDetailsViewController listDetailsViewController;
+    ListerModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_details);
+        model = ((ListerApplication) this.getApplication()).getModel();
 
         // Creating the list details instance
-        listDetailsView = new ListDetailsView(findViewById(R.layout.activity_list_details), this);
+        listDetailsView = new ListDetailsView(findViewById(R.layout.activity_list_details), model, this);
         listDetailsViewController = new ListDetailsViewController(listDetailsView);
     }
 

@@ -46,4 +46,14 @@ public class ListerModel extends Observable {
         todoLists.add(todoList);
     }
 
+    public TodoList getTodoById(int id) {
+        List<TodoList> todoLists = getTodoLists();
+
+        for (TodoList todoList: todoLists) {
+            if (todoList.getId() == id) {
+                return todoList;
+            }
+        }
+        return null;
+    }
 }
