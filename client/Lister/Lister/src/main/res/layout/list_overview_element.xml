@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
+        android:id="@+id/overview_container"
         android:layout_gravity="center_horizontal" >
 
         <LinearLayout
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="Todo"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:id="@+id/list_id" />
+                android:id="@+id/list_title" />
 
             <TextView
                 android:id="@+id/textView4"
