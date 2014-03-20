@@ -1,9 +1,5 @@
 package se.dxtr.lister.view;
 
-import se.dxtr.lister.R;
-import se.dxtr.lister.model.ListItem;
-import se.dxtr.lister.model.ListerModel;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
@@ -15,7 +11,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import se.dxtr.lister.R;
 import se.dxtr.lister.controller.ListOverviewViewController;
+import se.dxtr.lister.model.ListItem;
+import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.model.TodoList;
 
 public class ListDetailsView {
@@ -23,7 +22,7 @@ public class ListDetailsView {
     public final Activity activity;
     public ListerModel model;
     public Button shareButton;
-    int id;
+    public int id;
 
     public ListDetailsView(View view, ListerModel model, final Activity activity) {
 
@@ -62,7 +61,6 @@ public class ListDetailsView {
             checkBox.setText(listItem.getContent());
             checkBox.setChecked(listItem.isChecked());
             itemsContainer.addView(checkBox);
-            checkBox.setEnabled(false);
         }
 
         LinearLayout listDetailsBottom = (LinearLayout) View.inflate(activity.getBaseContext(),

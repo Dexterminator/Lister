@@ -66,13 +66,19 @@ public class CreateAccountViewController implements OnClickListener {
         @Override
         protected void onPostExecute(String result) {
             Log.d("Create account response", result);
+            CharSequence text;
             Context context = view.activity.getApplicationContext();
-            CharSequence text = "Account created!";
             int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            view.activity.finish();
+            if (result.startsWith("False")) {
+                text = "Illegal characters in username or password";
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else{
+                text = "Account created!";
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                view.activity.finish();
+            }
         }
     }
 

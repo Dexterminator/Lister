@@ -1,12 +1,14 @@
 package se.dxtr.lister.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import se.dxtr.lister.R;
+import se.dxtr.lister.controller.ListDetailsViewController;
 import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.model.TodoList;
 import se.dxtr.lister.model.User;
@@ -22,8 +24,9 @@ public class ManageCollaboratorsView {
         // store in the class the reference to the Android View
         this.view = view;
         this.activity = activity;
-        id = 1;
-        TodoList todoList = model.getTodoLists().get(3);
+        Intent intent = activity.getIntent();
+        id = intent.getIntExtra(ListDetailsViewController.LIST_ID, 0);
+        TodoList todoList = model.getTodoById(id);
         manageCollaboratorsButton = (Button) activity.findViewById(R.id.manage_collaborators_button);
 
         for (User collaborator: todoList.getCollaborators()) {
