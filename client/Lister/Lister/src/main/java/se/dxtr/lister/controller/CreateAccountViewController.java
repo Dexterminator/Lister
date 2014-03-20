@@ -1,9 +1,10 @@
 package se.dxtr.lister.controller;
 
-import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import se.dxtr.lister.ListOverviewActivity;
+import android.widget.EditText;
+
+import se.dxtr.lister.R;
 import se.dxtr.lister.view.CreateAccountView;
 
 public class CreateAccountViewController implements OnClickListener {
@@ -17,10 +18,20 @@ public class CreateAccountViewController implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent;
+        EditText username = (EditText) view.activity.findViewById(R.id.created_username);
+        EditText password = (EditText) view.activity.findViewById(R.id.created_password);
 
-        intent = new Intent(view.activity, ListOverviewActivity.class);
-        view.activity.startActivity(intent);
+        view.activity.finish();
     }
+//
+//    private void createAccount(String username, String password) {
+//        URL host = null;
+//        InputStream is = null;
+//        try {
+//            host = new URL(view.activity.getString(R.string.host) + "get_lists/id="+uid);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 }

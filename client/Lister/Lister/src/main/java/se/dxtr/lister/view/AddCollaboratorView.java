@@ -25,6 +25,7 @@ public class AddCollaboratorView {
 
         // Setup the rest of the view layout
         addCollaboratorButton = (Button) activity.findViewById(R.id.add_collaborator_button);
+        //TODO: Add new collaborator to the correct todolist
     }
 
 }

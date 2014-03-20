@@ -241,9 +241,10 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cnx = self.connect()
         cursor = cnx.cursor()
         cursor.execute(login_query, (name, password))
-        (uid,) = cursor.fetchone()
-        if uid != None:
+        uid_tuple = cursor.fetchone()
+        if uid_tuple is not None:
             print "Login successful"
+            (uid,) = uid_tuple
             response = uid
         else:
             print "Login failed"

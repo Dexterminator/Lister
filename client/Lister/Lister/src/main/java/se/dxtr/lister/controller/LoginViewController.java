@@ -113,7 +113,7 @@ public class LoginViewController implements OnClickListener {
 
         @Override
         protected void onPostExecute(String response) {
-            if (response.equals("False")) {
+            if (response.startsWith("False")) {
                 Context context = view.activity.getApplicationContext();
                 CharSequence text = "Wrong username or password";
                 int duration = Toast.LENGTH_SHORT;

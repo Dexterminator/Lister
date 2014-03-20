@@ -45,7 +45,7 @@
             android:inputType="textPersonName"
             android:hint="Username"
             android:ems="10"
-            android:id="@+id/username"
+            android:id="@+id/created_username"
             android:layout_gravity="center_horizontal" />
 
         <EditText
@@ -55,7 +55,7 @@
             android:inputType="textPassword"
             android:hint="Password"
             android:ems="10"
-            android:id="@+id/password"
+            android:id="@+id/created_password"
             android:layout_gravity="center_horizontal" />
 
         <Button
