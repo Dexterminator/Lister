@@ -4,6 +4,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import se.dxtr.lister.R;
 import se.dxtr.lister.view.CreateAccountView;
 
@@ -23,15 +27,16 @@ public class CreateAccountViewController implements OnClickListener {
 
         view.activity.finish();
     }
-//
-//    private void createAccount(String username, String password) {
-//        URL host = null;
-//        InputStream is = null;
-//        try {
-//            host = new URL(view.activity.getString(R.string.host) + "get_lists/id="+uid);
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    private void createAccount(String username, String password) {
+        URL host = null;
+        InputStream is = null;
+        try {
+            host = new URL(view.activity.getString(R.string.host) + "create_account/username="
+                    + username + "&password=" + password);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

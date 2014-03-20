@@ -11,21 +11,17 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 import se.dxtr.lister.CreateAccountActivity;
 import se.dxtr.lister.ListOverviewActivity;
+import se.dxtr.lister.R;
+import se.dxtr.lister.ResponseReader;
 import se.dxtr.lister.model.ListData;
 import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.view.LoginView;
-import se.dxtr.lister.R;
 
 public class LoginViewController implements OnClickListener {
     LoginView view;
@@ -63,44 +59,13 @@ public class LoginViewController implements OnClickListener {
     public String validateLogin(String name, String password) {
         URL host = null;
         InputStream is = null;
-        String hoster = view.activity.getString(R.string.host);
         try {
-            host = new URL(view.activity.getString(R.string.host) + "login/name=" + name + "&password=" +password);
+            host = new URL(view.activity.getString(R.string.host) + "login/name=" + name + "&password=" + password);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        try {
-            HttpURLConnection conn = (HttpURLConnection) host.openConnection();
-            conn.setReadTimeout(15000 /* milliseconds */);
-            conn.setConnectTimeout(5000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            // Starts the query
-            conn.connect();
-            int response = conn.getResponseCode();
-            if (response != 200) {
-                return "False";
-            }
-            Log.d("Server", "The response is: " + response);
-            is = conn.getInputStream();
 
-            // Convert the InputStream into a string
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            br.close();
-
-            return sb.toString();
-
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "False";
+        return ResponseReader.getResponse(host);
     }
 
     private class LoginTask extends AsyncTask<String, Void, String> {
@@ -136,39 +101,7 @@ public class LoginViewController implements OnClickListener {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        try {
-            HttpURLConnection conn = (HttpURLConnection) host.openConnection();
-            conn.setReadTimeout(15000 /* milliseconds */);
-            conn.setConnectTimeout(5000 /* milliseconds */);
-            conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            // Starts the query
-            conn.connect();
-            int response = conn.getResponseCode();
-            if (response != 200) {
-                return "False";
-            }
-            Log.d("Server", "The response is: " + response);
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            br.close();
-
-            return sb.toString();
-
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return "False";
-
+        return ResponseReader.getResponse(host);
     }
 
     private class FetchListTask extends AsyncTask<String, Void, String> {
