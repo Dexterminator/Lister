@@ -237,13 +237,14 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         print "name: " + name
         print "password: " + password
         print
-        login_query = "SELECT * FROM users WHERE name = %s AND password = %s"
+        login_query = "SELECT id FROM users WHERE name = %s AND password = %s"
         cnx = self.connect()
         cursor = cnx.cursor()
         cursor.execute(login_query, (name, password))
-        if len(cursor.fetchall()) > 0:
+        (uid,) = cursor.fetchone()
+        if uid != None:
             print "Login successful"
-            response = True
+            response = uid
         else:
             print "Login failed"
             response = False
