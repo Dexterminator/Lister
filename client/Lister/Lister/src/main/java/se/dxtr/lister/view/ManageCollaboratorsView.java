@@ -1,23 +1,41 @@
 package se.dxtr.lister.view;
 
-import se.dxtr.lister.R;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import se.dxtr.lister.R;
+import se.dxtr.lister.model.ListerModel;
+import se.dxtr.lister.model.TodoList;
+import se.dxtr.lister.model.User;
 
 public class ManageCollaboratorsView {
     View view;
     public final Activity activity;
     public Button manageCollaboratorsButton;
 
-    public ManageCollaboratorsView(View view, final Activity activity) {
+    public ManageCollaboratorsView(View view, ListerModel model, final Activity activity) {
 
         // store in the class the reference to the Android View
         this.view = view;
         this.activity = activity;
-
-        // Setup the rest of the view layout
+        int id = 1;
+        TodoList todoList = model.getTodoLists().get(3);
         manageCollaboratorsButton = (Button) activity.findViewById(R.id.manage_collaborators_button);
+
+        for (User collaborator: todoList.getCollaborators()) {
+            LinearLayout userContainer = (LinearLayout) activity.findViewById(R.id.user_container);
+            LinearLayout dateContainer = (LinearLayout) activity.findViewById(R.id.date_added_container);
+            TextView userElement = (TextView) View.inflate(activity.getBaseContext(), R.layout.user_element, null);
+            TextView dateElement = (TextView) View.inflate(activity.getBaseContext(), R.layout.date_added_element, null);
+            userElement.setText(collaborator.getName());
+            dateElement.setText(collaborator.getDateCreated());
+            userContainer.addView(userElement);
+            dateContainer.addView(dateElement);
+        }
+
     }
 
 }

@@ -31,7 +31,7 @@ public class ListerModel extends Observable {
                 todoList.addListItem(listItem);
             }
             for (ListData.CollaboratorData collabData: data.getCollaboratorDatas()){
-                User user = new User(collabData.getId(), collabData.getName());
+                User user = new User(collabData.getId(), collabData.getName(), collabData.getDateCreated());
                 todoList.addCollaborator(user);
             }
             todoLists.add(todoList);

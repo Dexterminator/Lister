@@ -1,29 +1,27 @@
 package se.dxtr.lister;
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 
 import se.dxtr.lister.controller.ManageCollaboratorsViewController;
+import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.view.ManageCollaboratorsView;
 
 public class ManageCollaboratorsActivity extends Activity {
     ManageCollaboratorsView manageCollaboratorsView;
     ManageCollaboratorsViewController manageCollaboratorsViewController;
+    ListerModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_collaborators);
 
-        manageCollaboratorsView = new ManageCollaboratorsView(findViewById(R.layout.activity_manage_collaborators), this);
+        model = ((ListerApplication) this.getApplication()).getModel();
+
+        manageCollaboratorsView = new ManageCollaboratorsView(findViewById(R.layout.activity_manage_collaborators), model, this);
         manageCollaboratorsViewController = new ManageCollaboratorsViewController(manageCollaboratorsView);
     }
 
