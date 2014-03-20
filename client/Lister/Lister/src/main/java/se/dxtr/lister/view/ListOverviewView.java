@@ -34,11 +34,18 @@ public class ListOverviewView {
             TextView listTitle = (TextView) overviewElement.findViewById(R.id.list_title);
             listTitle.setText(todoList.getTitle());
             overviewContainer.addView(overviewElement);
+            int itemCount = 0;
             for (ListItem listItem: todoList.getListItems()) {
+                if (itemCount >= 3) {
+                    break;
+                }
                 CheckBox checkBox = (CheckBox) View.inflate(activity.getBaseContext(),
                         R.layout.list_element, null);
                 checkBox.setText(listItem.getContent());
+                checkBox.setChecked(listItem.isChecked());
                 overviewElement.addView(checkBox);
+                checkBox.setEnabled(false);
+                itemCount++;
             }
         }
 
