@@ -1,14 +1,25 @@
 package se.dxtr.lister.controller;
 
-import android.content.Intent;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.View.OnClickListener;
-import se.dxtr.lister.ManageCollaboratorsActivity;
+import android.widget.Toast;
+
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
+
+import se.dxtr.lister.R;
+import se.dxtr.lister.ResponseReader;
+import se.dxtr.lister.model.TodoList;
+import se.dxtr.lister.model.User;
 import se.dxtr.lister.view.AddCollaboratorView;
-import se.dxtr.lister.view.ManageCollaboratorsView;
 
 public class AddCollaboratorViewController implements OnClickListener {
     AddCollaboratorView view;
+    String username;
 
     public AddCollaboratorViewController(AddCollaboratorView view) {
         this.view = view;
@@ -18,7 +29,46 @@ public class AddCollaboratorViewController implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        view.activity.finish();
+        username = view.usernameField.getText().toString();
+        new addCollaboratorTask().execute(username);
     }
 
+    private class addCollaboratorTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String username = params[0];
+            URL host = null;
+            InputStream is = null;
+            try {
+                host = new URL(view.activity.getString(R.string.host) + "share/name=" + username + "&list_id=" + view.id);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            return ResponseReader.getResponse(host);
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            Context context = view.activity.getApplicationContext();
+            int duration = Toast.LENGTH_SHORT;
+            CharSequence text;
+            if (response.startsWith("False")){
+                text = "No such username";
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }else {
+                TodoList todoList = view.model.getTodoById(view.id);
+                User collaborator = new User(Integer.parseInt(response.replace("\n", "")), username, new Date().toString());
+                todoList.addCollaborator(collaborator);
+                text = "Collaborator added!";
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+                view.activity.finish();
+            }
+        }
+    }
+
+
 }
+

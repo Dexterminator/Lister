@@ -271,23 +271,33 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         self.respond(True)
 
     #Handle requests of the following type:
-    #host/share/uid=2&list_id=4
+    #host/share/name=qwe&list_id=4
     def share(self, request_params):
-        uid = request_params['uid']
+        username = request_params['name']
         list_id = request_params['list_id']
-        print "User id: " + uid
+        print "Username: " + username
         print "List id: " + list_id
         print
 
+        get_id_query = "SELECT id FROM users WHERE name = %s"
         share_query = "INSERT INTO collaborators (uid, list_id) VALUES (%s, %s)"
         cnx = self.connect()
         cursor = cnx.cursor()
-        cursor.execute(share_query, (uid, list_id))
-        cnx.commit()
-        cursor.close()
-        cnx.close()
-        print "Inserted {}, {} into collaborators".format(uid, list_id)
-        self.respond(True)
+        cursor.execute(get_id_query, (username,))
+        uid_tuple = cursor.fetchone()
+        if uid_tuple is not None:
+            (uid,) = uid_tuple
+            cursor.execute(share_query, (uid, list_id))
+            cnx.commit()
+            cursor.close()
+            cnx.close()
+            self.respond(uid)
+            print "Inserted {}, {} into collaborators".format(username, list_id)
+        else:
+            cursor.close()
+            cnx.close()
+            self.respond(False)
+            print "Share failed"
 
     #Connects to the database and returns the connection object
     def connect(self):

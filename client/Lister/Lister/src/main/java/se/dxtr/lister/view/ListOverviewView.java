@@ -48,7 +48,7 @@ public class ListOverviewView {
                 checkBox.setText(listItem.getContent());
                 checkBox.setChecked(listItem.isChecked());
                 overviewElement.addView(checkBox, overviewElement.getChildCount()-2);
-                checkBox.setEnabled(false);
+                checkBox.setClickable(false);
                 itemCount++;
             }
             overviewElements.put(overviewElement, todoList.getId());

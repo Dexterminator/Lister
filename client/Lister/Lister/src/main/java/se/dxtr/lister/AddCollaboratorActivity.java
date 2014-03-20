@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.view.AddCollaboratorView;
 import se.dxtr.lister.controller.AddCollaboratorViewController;
 
@@ -11,13 +13,15 @@ import se.dxtr.lister.controller.AddCollaboratorViewController;
 public class AddCollaboratorActivity extends Activity {
     AddCollaboratorView addCollaboratorView;
     AddCollaboratorViewController addCollaboratorViewController;
+    ListerModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_collaborator);
+        model = ((ListerApplication) this.getApplication()).getModel();
 
-        addCollaboratorView = new AddCollaboratorView(findViewById(R.layout.activity_add_collaborator), this);
+        addCollaboratorView = new AddCollaboratorView(findViewById(R.layout.activity_add_collaborator), model,  this);
         addCollaboratorViewController = new AddCollaboratorViewController(addCollaboratorView);
     }
 
