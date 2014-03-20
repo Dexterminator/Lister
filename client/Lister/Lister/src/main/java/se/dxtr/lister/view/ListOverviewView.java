@@ -43,7 +43,7 @@ public class ListOverviewView {
                         R.layout.list_element, null);
                 checkBox.setText(listItem.getContent());
                 checkBox.setChecked(listItem.isChecked());
-                overviewElement.addView(checkBox);
+                overviewElement.addView(checkBox, overviewElement.getChildCount()-2);
                 checkBox.setEnabled(false);
                 itemCount++;
             }
