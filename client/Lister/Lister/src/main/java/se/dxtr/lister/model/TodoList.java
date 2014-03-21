@@ -98,6 +98,9 @@ public class TodoList {
         /*
          * Use format method of SimpleDateFormat class to format the date.
          */
+        if (dateOfDeadline == null){
+            return "";
+        }
         return sdf.format(dateOfDeadline);
     }
 

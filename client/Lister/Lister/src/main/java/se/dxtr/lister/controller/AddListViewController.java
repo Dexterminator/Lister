@@ -18,17 +18,18 @@ import se.dxtr.lister.ListDetailsActivity;
 import se.dxtr.lister.R;
 import se.dxtr.lister.ResponseReader;
 import se.dxtr.lister.model.TodoList;
+import se.dxtr.lister.model.User;
 import se.dxtr.lister.view.AddListView;
 
 
 public class AddListViewController implements OnClickListener {
     public final static String LIST_ID = "se.dxtr.lister.LIST_ID";
     AddListView view;
-    int uid;
+    User user;
 
     public AddListViewController(AddListView view) {
         this.view = view;
-        uid = view.model.getLoggedInUserId();
+        user = view.model.getLoggedInUser();
         view.addListButton.setOnClickListener(this);
     }
 
@@ -36,7 +37,7 @@ public class AddListViewController implements OnClickListener {
     public void onClick(View v) {
         String title = view.titleField.getText().toString();
         String deadline = view.deadlineField.getText().toString();
-        Log.d("Test add list params", String.valueOf(uid) +  title + deadline);
+        Log.d("Test add list params", String.valueOf(user.getId()) +  title + deadline);
         new AddListTask().execute(title, deadline);
 
 
@@ -52,7 +53,7 @@ public class AddListViewController implements OnClickListener {
             URL host = null;
             try {
                 host = new URL(view.activity.getString(R.string.host) + "new_list/title=" + title + "&deadline=" + deadline
-                + "&author=" + uid);
+                + "&author=" + user.getId());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -76,11 +77,9 @@ public class AddListViewController implements OnClickListener {
                     e.printStackTrace();
                 }
                 int listId = Integer.parseInt(response.replace("\n", ""));
-                TodoList todoList = new TodoList(listId, title, uid, deadlineDate, new Date());
+                TodoList todoList = new TodoList(listId, title, user.getId(), deadlineDate, new Date());
                 view.model.addTodoList(todoList);
-                //TODO Add logged in user as collaborator.
-//                User collaborator = new User(Integer.parseInt(response.replace("\n", "")), username, new Date());
-//                todoList.addCollaborator(collaborator);
+                todoList.addCollaborator(view.model.getLoggedInUser());
                 text = "List added!";
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();

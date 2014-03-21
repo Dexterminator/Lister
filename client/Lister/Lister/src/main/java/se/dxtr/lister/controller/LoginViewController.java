@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
 import se.dxtr.lister.CreateAccountActivity;
 import se.dxtr.lister.ListOverviewActivity;
@@ -21,6 +22,7 @@ import se.dxtr.lister.R;
 import se.dxtr.lister.ResponseReader;
 import se.dxtr.lister.model.ListData;
 import se.dxtr.lister.model.ListerModel;
+import se.dxtr.lister.model.User;
 import se.dxtr.lister.view.LoginView;
 
 public class LoginViewController implements OnClickListener {
@@ -69,10 +71,13 @@ public class LoginViewController implements OnClickListener {
     }
 
     private class LoginTask extends AsyncTask<String, Void, String> {
+        String name;
+        String password;
+
         @Override
         protected String doInBackground(String... params) {
-            String name = params[0];
-            String password = params[1];
+            name = params[0];
+            password = params[1];
             return validateLogin(name, password);
         }
 
@@ -87,7 +92,7 @@ public class LoginViewController implements OnClickListener {
                 toast.show();
 
             } else {
-                model.setLoggedInUserId(Integer.parseInt(response.replace("\n", "")));
+                model.setLoggedInUser(new User(Integer.parseInt(response.replace("\n", "")), name, new Date()));
                 new FetchListTask().execute(response);
             }
             Log.d("The response: ", response);
