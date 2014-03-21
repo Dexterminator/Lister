@@ -18,7 +18,7 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:hint="Task"
-        android:id="@+id/editText"
+        android:id="@+id/task_field"
         android:layout_gravity="center_horizontal" />
 
     <Button

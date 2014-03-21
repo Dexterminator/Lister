@@ -6,19 +6,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import se.dxtr.lister.controller.AddItemViewController;
+import se.dxtr.lister.model.ListerModel;
 import se.dxtr.lister.view.AddItemView;
 
 
 public class AddItemActivity extends Activity {
     AddItemView addItemView;
     AddItemViewController addItemViewController;
+    ListerModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_item);
+        model = ((ListerApplication) this.getApplication()).getModel();
 
-        addItemView = new AddItemView(findViewById(R.layout.add_list_view), this);
+
+        addItemView = new AddItemView(findViewById(R.layout.add_list_view), model, this);
         addItemViewController = new AddItemViewController(addItemView);
     }
 

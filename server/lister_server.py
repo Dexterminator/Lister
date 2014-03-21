@@ -121,6 +121,10 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
                                "VALUES (%s, %s, %s)")
         cursor.execute(new_list_item_query, (list_id, content, False))
 
+        last_insert_query = "SELECT LAST_INSERT_ID()"
+        cursor.execute(last_insert_query)
+        (item_id,) = cursor.fetchone()
+
         last_change_query = "UPDATE lists SET last_change = NULL WHERE id = %s"
         cursor.execute(last_change_query, (list_id,))
 
@@ -128,7 +132,8 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         cursor.close()
         cnx.close()
         print "Inserted {}, {}, {} into list_items".format(list_id, content, False)
-        self.respond(True)
+        print "New item id:", item_id
+        self.respond(item_id)
 
     #Handle requests of the following type:
     #host/set_checked_status/id=1&checked=false
