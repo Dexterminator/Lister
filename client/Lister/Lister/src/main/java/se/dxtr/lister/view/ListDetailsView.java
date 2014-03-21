@@ -53,6 +53,7 @@ public class ListDetailsView {
 
         LinearLayout itemsContainer = (LinearLayout) View.inflate(activity.getBaseContext(),
                 R.layout.list_details_content, null);
+        LinearLayout itemsScroll = (LinearLayout) itemsContainer.findViewById(R.id.details_items_container);
         detailsContainer.addView(itemsContainer);
 
         // Fetch all the items in the list and add them to the items container.
@@ -61,7 +62,7 @@ public class ListDetailsView {
                     R.layout.list_element, null);
             checkBox.setText(listItem.getContent());
             checkBox.setChecked(listItem.isChecked());
-            itemsContainer.addView(checkBox);
+            itemsScroll.addView(checkBox);
             listElements.put(checkBox, listItem.getItemID());
         }
 
