@@ -54,6 +54,16 @@ INSERT INTO list_items (list_id, content, checked) VALUES (1, 'milk', false);
 INSERT INTO list_items (list_id, content, checked) VALUES (1, 'beer', false);
 INSERT INTO list_items (list_id, content, checked) VALUES (1, 'butter', true);
 INSERT INTO list_items (list_id, content, checked) VALUES (1, 'bread', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'jam', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'beef', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'tomatoes', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'potatoes', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'lettuce', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'bacon', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'meatballs', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'pasta', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'rice', false);
+INSERT INTO list_items (list_id, content, checked) VALUES (1, 'salmon', false);
 
 INSERT INTO list_items (list_id, content, checked) VALUES (2, 'toothbrush', false);
 INSERT INTO list_items (list_id, content, checked) VALUES (2, 'pillow', true);
