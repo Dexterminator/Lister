@@ -20,7 +20,7 @@ public class ListOverviewView {
     View view;
     ListerModel model;
     public final Activity activity;
-    public Map<LinearLayout, Integer> overviewElements;
+    public Map<LinearLayout, Integer> overviewTitleElements;
     public Button newListButton;
 
     public ListOverviewView(View view, ListerModel model, final Activity activity) {
@@ -29,17 +29,30 @@ public class ListOverviewView {
         this.view = view;
         this.activity = activity;
         this.model = model;
-        this.overviewElements = new HashMap<LinearLayout, Integer>();
+        this.overviewTitleElements = new HashMap<LinearLayout, Integer>();
 
         // Setup the rest of the view layout
         newListButton = (Button)  activity.findViewById(R.id.new_list_button);
         List<TodoList> todoLists = model.getTodoLists();
         LinearLayout overviewContainer = (LinearLayout) activity.findViewById(R.id.overview_container);
+
         for (TodoList todoList : todoLists) {
+            LinearLayout listOverviewTitle= (LinearLayout) View.inflate(activity.getBaseContext(),
+                    R.layout.list_overview_title, null);
+            TextView listTitle = (TextView) listOverviewTitle.findViewById(R.id.list_title);
+            listTitle.setText(todoList.getTitle());
+            LinearLayout deadlineWarning = (LinearLayout) View.inflate(activity.getBaseContext(),
+                    R.layout.deadline_warning, null);
+            overviewContainer.addView(listOverviewTitle);
+
+            // Only show deadline warning if the deadline is close.
+            if (1 == 1) {
+                overviewContainer.addView(deadlineWarning);
+            }
+
             LinearLayout overviewElement = (LinearLayout) View.inflate(activity.getBaseContext(),
                     R.layout.list_overview_element, null);
-            TextView listTitle = (TextView) overviewElement.findViewById(R.id.list_title);
-            listTitle.setText(todoList.getTitle());
+
             overviewContainer.addView(overviewElement);
             int itemCount = 0;
             for (ListItem listItem: todoList.getListItems()) {
@@ -54,7 +67,7 @@ public class ListOverviewView {
                 checkBox.setClickable(false);
                 itemCount++;
             }
-            overviewElements.put(overviewElement, todoList.getId());
+            overviewTitleElements.put(listOverviewTitle, todoList.getId());
         }
 
     }

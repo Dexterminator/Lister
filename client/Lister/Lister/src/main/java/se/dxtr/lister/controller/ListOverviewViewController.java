@@ -19,7 +19,7 @@ public class ListOverviewViewController implements OnClickListener {
         this.view = view;
 
         //TODO Somehow make listeners for each list
-        for (LinearLayout element : view.overviewElements.keySet()) {
+        for (LinearLayout element : view.overviewTitleElements.keySet()) {
             element.setOnClickListener(this);
 
         }
@@ -33,7 +33,7 @@ public class ListOverviewViewController implements OnClickListener {
             intent = new Intent(view.activity, AddListActivity.class);
             view.activity.startActivity(intent);
         } else {
-            int id = view.overviewElements.get(v);
+            int id = view.overviewTitleElements.get(v);
             Log.d("list id", String.valueOf(id));
             intent = new Intent(view.activity, ListDetailsActivity.class);
             intent.putExtra(LIST_ID, id);

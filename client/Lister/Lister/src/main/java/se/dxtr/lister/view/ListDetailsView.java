@@ -39,8 +39,6 @@ public class ListDetailsView {
         Log.d("Test detailview id", String.valueOf(id));
 
         // Setup the rest of the view layout
-//        listElement1 = (CheckBox) activity.findViewById(R.id.list_element_1);
-
         TodoList todoList = model.getTodoById(id);
         List<ListItem> listItems = todoList.getListItems();
         LinearLayout detailsContainer = (LinearLayout) activity.findViewById(R.id.details_container);
@@ -55,7 +53,6 @@ public class ListDetailsView {
 
         LinearLayout itemsContainer = (LinearLayout) View.inflate(activity.getBaseContext(),
                 R.layout.list_details_content, null);
-//        LinearLayout itemsContainer = (LinearLayout) activity.findViewById(R.id.details_items_container);
         detailsContainer.addView(itemsContainer);
 
         // Fetch all the items in the list and add them to the items container.
