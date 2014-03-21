@@ -39,7 +39,7 @@ create table collaborators (
 	FOREIGN KEY (list_id) REFERENCES lists (id)
 );
 
-INSERT INTO users (name, password) VALUES ('Dexter', 'bananpaj');
+INSERT INTO users (name, password) VALUES ('qwe', 'qwe');
 INSERT INTO users (name, password) VALUES ('Annica', 'ilovecats');
 INSERT INTO users (name, password) VALUES ('Francis', 'power');
 
