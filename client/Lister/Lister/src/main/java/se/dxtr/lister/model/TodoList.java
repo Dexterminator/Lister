@@ -1,7 +1,10 @@
 package se.dxtr.lister.model;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -89,7 +92,7 @@ public class TodoList {
     }
 
     public String getDeadlineString() {
-        Date dateOfDeadline = getLastChange();
+        Date dateOfDeadline = getDeadline();
         // Specify the desired date format
         String DATE_FORMAT = "yyyy-MM-dd";
         // Create object of SimpleDateFormat and pass the desired date format.
@@ -98,6 +101,14 @@ public class TodoList {
          * Use format method of SimpleDateFormat class to format the date.
          */
         return sdf.format(dateOfDeadline);
+    }
+
+    public int getWarning() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd");
+        Calendar cal = Calendar.getInstance();
+        int dateOfDeadline = Integer.parseInt(sdf.format(getDeadline()));
+        int today = Integer.parseInt(sdf.format(cal.getTime()));
+        return dateOfDeadline - today;
     }
 
 }

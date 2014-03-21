@@ -46,7 +46,7 @@ public class ListOverviewView {
             overviewContainer.addView(listOverviewTitle);
 
             // Only show deadline warning if the deadline is close.
-            if (1 == 1) {
+            if (todoList.getWarning() > 1) {
                 overviewContainer.addView(deadlineWarning);
             }
 
