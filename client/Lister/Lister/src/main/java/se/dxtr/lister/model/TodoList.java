@@ -1,7 +1,5 @@
 package se.dxtr.lister.model;
 
-import android.util.Log;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -109,6 +107,15 @@ public class TodoList {
         int dateOfDeadline = Integer.parseInt(sdf.format(getDeadline()));
         int today = Integer.parseInt(sdf.format(cal.getTime()));
         return dateOfDeadline - today;
+    }
+
+    public ListItem getListItemById(int id) {
+        for (ListItem listItem: listItems) {
+            if (listItem.getItemID() == id) {
+                return listItem;
+            }
+        }
+        return null;
     }
 
 }

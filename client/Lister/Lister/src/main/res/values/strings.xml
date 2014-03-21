@@ -10,7 +10,7 @@
     <string name="title_activity_manage_shares">ManageSharesActivity</string>
     <string name="title_activity_manage_collaborators">ManageCollaboratorsActivity</string>
     <string name="title_activity_add_collaborator">AddCollaborator</string>
-    <string name="host">http://192.168.1.5:8888/</string>
+    <string name="host">http://192.168.1.36:8888/</string>
     <string name="title_activity_add_list">AddListActivity</string>
     <string name="title_activity_add_item">AddItemActivity</string>
 

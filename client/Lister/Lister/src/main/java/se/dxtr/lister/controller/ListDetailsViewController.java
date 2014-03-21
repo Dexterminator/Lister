@@ -15,6 +15,7 @@ import se.dxtr.lister.AddItemActivity;
 import se.dxtr.lister.ManageCollaboratorsActivity;
 import se.dxtr.lister.R;
 import se.dxtr.lister.ResponseReader;
+import se.dxtr.lister.model.TodoList;
 import se.dxtr.lister.view.ListDetailsView;
 
 public class ListDetailsViewController implements OnClickListener {
@@ -49,11 +50,13 @@ public class ListDetailsViewController implements OnClickListener {
 
     }
     private class CheckItemTask extends AsyncTask<String, Void, String> {
+        String id;
+        String checked;
 
         @Override
         protected String doInBackground(String... params) {
-            String id = params[0];
-            String checked = params[1];
+            id = params[0];
+            checked = params[1];
             URL host = null;
             InputStream is = null;
             try {
@@ -67,7 +70,8 @@ public class ListDetailsViewController implements OnClickListener {
         @Override
         protected void onPostExecute(String response) {
             Log.d("Checked response", response);
-            //TODO Check listitem in model
+            TodoList todoList = view.model.getTodoById(view.id);
+            todoList.getListItemById(Integer.parseInt(id)).setChecked(Boolean.parseBoolean(checked));
         }
     }
 }
