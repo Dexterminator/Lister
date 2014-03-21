@@ -65,6 +65,10 @@
             android:name="se.dxtr.lister.AddListActivity"
             android:label="@string/title_activity_add_list" >
         </activity>
+        <activity
+            android:name="se.dxtr.lister.AddItemActivity"
+            android:label="@string/title_activity_add_item" >
+        </activity>
     </application>
 
 </manifest>

@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import se.dxtr.lister.AddItemActivity;
 import se.dxtr.lister.ManageCollaboratorsActivity;
 import se.dxtr.lister.R;
 import se.dxtr.lister.ResponseReader;
@@ -26,16 +27,21 @@ public class ListDetailsViewController implements OnClickListener {
             checkBox.setOnClickListener(this);
         }
         view.shareButton.setOnClickListener(this);
+        view.newItemButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         if (v.getId() == R.id.share_button){
-            Intent intent;
             intent = new Intent(view.activity, ManageCollaboratorsActivity.class);
             intent.putExtra(LIST_ID, view.id);
             view.activity.startActivity(intent);
-        }else{
+        } else if (v.getId() == R.id.new_item_button) {
+            intent = new Intent(view.activity, AddItemActivity.class);
+            intent.putExtra(LIST_ID, view.id);
+            view.activity.startActivity(intent);
+        }else {
             String id = String.valueOf(view.listElements.get(v));
             String checked = String.valueOf(((CheckBox) v).isChecked());
             new CheckItemTask().execute(id, checked);

@@ -23,7 +23,7 @@ public class ListDetailsView {
     View view;
     public final Activity activity;
     public ListerModel model;
-    public Button shareButton;
+    public Button shareButton, newItemButton;
     public int id;
     public Map<CheckBox, Integer> listElements;
 
@@ -68,6 +68,7 @@ public class ListDetailsView {
         LinearLayout listDetailsBottom = (LinearLayout) View.inflate(activity.getBaseContext(),
                 R.layout.list_details_bottom, null);
         TextView lastChanged = (TextView) listDetailsBottom.findViewById(R.id.last_changed);
+        newItemButton = (Button) listDetailsBottom.findViewById(R.id.new_item_button);
         shareButton = (Button) listDetailsBottom.findViewById(R.id.share_button);
         lastChanged.setText("Last changed: " + todoList.getLastChangeString());
         detailsContainer.addView(listDetailsBottom);

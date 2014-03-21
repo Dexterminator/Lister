@@ -4,16 +4,15 @@ import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import se.dxtr.lister.ListDetailsActivity;
-import se.dxtr.lister.view.AddListView;
+import se.dxtr.lister.view.AddItemView;
 
+public class AddItemViewController implements OnClickListener {
+    AddItemView view;
 
-public class AddListViewController implements OnClickListener {
-    AddListView view;
-
-    public AddListViewController(AddListView view) {
+    public AddItemViewController(AddItemView view) {
         this.view = view;
 
-        view.addListButton.setOnClickListener(this);
+        view.addItemButton.setOnClickListener(this);
     }
 
     @Override
