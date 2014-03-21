@@ -14,6 +14,9 @@ import java.util.Observable;
  */
 public class ListerModel extends Observable {
     private List<TodoList> todoLists;
+    private int loggedInUserId;
+
+
 
     public ListerModel() {
         todoLists = new ArrayList<TodoList>();
@@ -21,6 +24,14 @@ public class ListerModel extends Observable {
 
     public List<TodoList> getTodoLists() {
         return todoLists;
+    }
+
+    public int getLoggedInUserId() {
+        return loggedInUserId;
+    }
+
+    public void setLoggedInUserId(int loggedInUser) {
+        this.loggedInUserId = loggedInUser;
     }
 
     public void loadListData(ListData listData) {

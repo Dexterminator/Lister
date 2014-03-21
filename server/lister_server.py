@@ -81,10 +81,8 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
         if request_params['deadline'] == "":
             deadline = None
         else:
-            deadline = float(request_params['deadline'])
-            #TODO: handle this correclty
-            deadline = datetime.fromtimestamp(deadline / 1000.0)
-
+            deadline = request_params['deadline']
+            deadline = datetime.strptime(deadline, '%Y-%m-%d')
         print "title: " + title
         print "author: " + author
         print "last_change: " + str(last_change)
@@ -96,14 +94,18 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
                           "VALUES (%s, %s, %s, %s)")
         cursor.execute(new_list_query, (title, author, last_change, deadline))
 
-        collaborator_query = "INSERT INTO collaborators (uid, list_id) VALUES (%s, LAST_INSERT_ID())"
-        cursor.execute(collaborator_query, author)
+        last_insert_query = "SELECT LAST_INSERT_ID()"
+        cursor.execute(last_insert_query)
+        (list_id,) = cursor.fetchone()
+
+        collaborator_query = "INSERT INTO collaborators (uid, list_id) VALUES (%s, %s)"
+        cursor.execute(collaborator_query, (author, list_id))
 
         cnx.commit()
         cursor.close()
         cnx.close()
         print "Inserted {}, {}, {}, {} into lists.".format(title, author, last_change, deadline)
-        self.respond(True)
+        self.respond(list_id)
 
     #Handle requests of the following type:
     #host/new_list_item/list_id=1&content=buy%20eggs

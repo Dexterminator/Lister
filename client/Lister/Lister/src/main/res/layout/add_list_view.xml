@@ -18,14 +18,14 @@
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:hint="Title"
-        android:id="@+id/editText"
+        android:id="@+id/title_field"
         android:layout_gravity="center_horizontal" />
 
     <EditText
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:hint="Deadline YYYY-MM-DD"
-        android:id="@+id/editText2"
+        android:id="@+id/deadline_field"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="30dp"/>
 

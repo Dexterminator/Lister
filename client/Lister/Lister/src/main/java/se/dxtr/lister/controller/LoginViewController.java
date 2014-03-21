@@ -87,6 +87,7 @@ public class LoginViewController implements OnClickListener {
                 toast.show();
 
             } else {
+                model.setLoggedInUserId(Integer.parseInt(response.replace("\n", "")));
                 new FetchListTask().execute(response);
             }
             Log.d("The response: ", response);
@@ -95,7 +96,6 @@ public class LoginViewController implements OnClickListener {
 
     public String fetchLists(String uid) {
         URL host = null;
-        InputStream is = null;
         try {
             host = new URL(view.activity.getString(R.string.host) + "get_lists/id="+uid);
         } catch (MalformedURLException e) {

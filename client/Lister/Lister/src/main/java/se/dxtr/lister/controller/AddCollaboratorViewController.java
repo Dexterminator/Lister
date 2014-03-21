@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -39,7 +38,6 @@ public class AddCollaboratorViewController implements OnClickListener {
         protected String doInBackground(String... params) {
             String username = params[0];
             URL host = null;
-            InputStream is = null;
             try {
                 host = new URL(view.activity.getString(R.string.host) + "share/name=" + username + "&list_id=" + view.id);
             } catch (MalformedURLException e) {
