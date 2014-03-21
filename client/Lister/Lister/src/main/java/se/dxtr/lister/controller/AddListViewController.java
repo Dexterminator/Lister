@@ -52,7 +52,7 @@ public class AddListViewController implements OnClickListener {
             deadline = params[1];
             URL host = null;
             try {
-                host = new URL(view.activity.getString(R.string.host) + "new_list/title=" + title + "&deadline=" + deadline
+                host = new URL(view.activity.getString(R.string.host) + "new_list/title=" + title.replace(" ", "%20") + "&deadline=" + deadline
                 + "&author=" + user.getId());
             } catch (MalformedURLException e) {
                 e.printStackTrace();

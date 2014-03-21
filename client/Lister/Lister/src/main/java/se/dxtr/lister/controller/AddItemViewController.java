@@ -41,7 +41,7 @@ public class AddItemViewController implements OnClickListener {
             URL host = null;
             InputStream is = null;
             try {
-                host = new URL(view.activity.getString(R.string.host) + "new_list_item/list_id=" + view.id + "&content=" + content);
+                host = new URL(view.activity.getString(R.string.host) + "new_list_item/list_id=" + view.id + "&content=" + content.replace(" ", "%20"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
