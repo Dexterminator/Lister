@@ -59,7 +59,7 @@ public class AddCollaboratorViewController implements OnClickListener {
                 toast.show();
             }else {
                 TodoList todoList = view.model.getTodoById(view.id);
-                User collaborator = new User(Integer.parseInt(response.replace("\n", "")), username, new Date().toString());
+                User collaborator = new User(Integer.parseInt(response.replace("\n", "")), username, new Date());
                 todoList.addCollaborator(collaborator);
                 text = "Collaborator added!";
                 Toast toast = Toast.makeText(context, text, duration);

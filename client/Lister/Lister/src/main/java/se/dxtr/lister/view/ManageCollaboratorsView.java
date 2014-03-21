@@ -35,7 +35,7 @@ public class ManageCollaboratorsView {
             TextView userElement = (TextView) View.inflate(activity.getBaseContext(), R.layout.user_element, null);
             TextView dateElement = (TextView) View.inflate(activity.getBaseContext(), R.layout.date_added_element, null);
             userElement.setText(collaborator.getName());
-            dateElement.setText(collaborator.getDateCreated());
+            dateElement.setText(collaborator.getDateCreatedString());
             userContainer.addView(userElement);
             dateContainer.addView(dateElement);
         }

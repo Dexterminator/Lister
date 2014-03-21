@@ -2,7 +2,10 @@ package se.dxtr.lister.model;
 
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 
@@ -21,17 +24,40 @@ public class ListerModel extends Observable {
     }
 
     public void loadListData(ListData listData) {
+        String expectedFormat = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat sdf = new SimpleDateFormat(expectedFormat);
+        Date deadline = null;
+        Date lastChange = null;
+        Date dateCreated = null;
+
         todoLists.clear();
         for (ListData.TodoListData data: listData.getTodoListDatas()){
+
+            // Parse the strings to date.
+            try {
+                deadline = sdf.parse(data.getDeadline());
+                lastChange = sdf.parse(data.getLastChange());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             TodoList todoList = new TodoList(data.getId(), data.getTitle(), data.getAuthor(),
-                    data.getDeadline(), data.getLastChange());
+                    deadline, lastChange);
             for (ListData.ListItemData itemData: data.getListItemDatas()){
                 ListItem listItem = new ListItem(itemData.getId(),
                         itemData.isChecked(), itemData.getContent());
                 todoList.addListItem(listItem);
             }
             for (ListData.CollaboratorData collabData: data.getCollaboratorDatas()){
-                User user = new User(collabData.getId(), collabData.getName(), collabData.getDateCreated());
+
+                // Parse the strings to date.
+                try {
+                    dateCreated = sdf.parse(collabData.getDateCreated());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                User user = new User(collabData.getId(), collabData.getName(), dateCreated);
                 todoList.addCollaborator(user);
             }
             todoLists.add(todoList);

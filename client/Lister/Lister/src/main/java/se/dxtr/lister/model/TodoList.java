@@ -1,5 +1,6 @@
 package se.dxtr.lister.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,12 +12,12 @@ public class TodoList {
     private int id;
     private String title;
     private int author;
-    private String deadline;
-    private String lastChange;
+    private Date deadline;
+    private Date lastChange;
     private List<ListItem> listItems;
     private List<User> collaborators;
 
-    public TodoList(int id, String title, int author, String deadline, String lastChange) {
+    public TodoList(int id, String title, int author, Date deadline, Date lastChange) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -38,11 +39,11 @@ public class TodoList {
         return author;
     }
 
-    public String getDeadline() {
+    public Date getDeadline() {
         return deadline;
     }
 
-    public String getLastChange() {
+    public Date getLastChange() {
         return lastChange;
     }
 
@@ -74,4 +75,29 @@ public class TodoList {
                 ", collaborators=" + collaborators +
                 '}';
     }
+
+    public String getLastChangeString() {
+        Date dateOfChange = getLastChange();
+        // Specify the desired date format
+        String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+        // Create object of SimpleDateFormat and pass the desired date format.
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        /*
+         * Use format method of SimpleDateFormat class to format the date.
+         */
+        return sdf.format(dateOfChange);
+    }
+
+    public String getDeadlineString() {
+        Date dateOfDeadline = getLastChange();
+        // Specify the desired date format
+        String DATE_FORMAT = "yyyy-MM-dd";
+        // Create object of SimpleDateFormat and pass the desired date format.
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+        /*
+         * Use format method of SimpleDateFormat class to format the date.
+         */
+        return sdf.format(dateOfDeadline);
+    }
+
 }

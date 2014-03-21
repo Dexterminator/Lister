@@ -50,7 +50,7 @@ public class ListDetailsView {
         TextView listTitle = (TextView) listDetailsHeader.findViewById(R.id.list_name);
         TextView deadline = (TextView) listDetailsHeader.findViewById(R.id.deadline);
         listTitle.setText(todoList.getTitle());
-        deadline.setText("Deadline " + todoList.getDeadline());
+        deadline.setText("Deadline " + todoList.getDeadlineString());
         detailsContainer.addView(listDetailsHeader);
 
         LinearLayout itemsContainer = (LinearLayout) View.inflate(activity.getBaseContext(),
@@ -72,7 +72,7 @@ public class ListDetailsView {
                 R.layout.list_details_bottom, null);
         TextView lastChanged = (TextView) listDetailsBottom.findViewById(R.id.last_changed);
         shareButton = (Button) listDetailsBottom.findViewById(R.id.share_button);
-        lastChanged.setText("Last changed: " + todoList.getLastChange());
+        lastChanged.setText("Last changed: " + todoList.getLastChangeString());
         detailsContainer.addView(listDetailsBottom);
 
     }
