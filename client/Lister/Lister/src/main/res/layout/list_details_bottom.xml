@@ -8,11 +8,18 @@
     android:layout_gravity="bottom"
     android:id="@+id/details_bottom_container">
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="7dp"
+        android:background="@color/gray" />
+
     <Button
-        style="@style/NewItemButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="10dp"
+        style="@style/NewItemButtonStyle"
         android:text="Add"
         android:id="@+id/new_item_button" />
 
