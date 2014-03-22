@@ -37,12 +37,15 @@ public class ListDetailsView {
         Intent intent = activity.getIntent();
         id = intent.getIntExtra(ListOverviewViewController.LIST_ID, 0);
         Log.d("Test detailview id", String.valueOf(id));
+    }
 
-        // Setup the rest of the view layout
+    public void update() {
+        Log.d("Details updated", "yup");
+        listElements = new HashMap<CheckBox, Integer>();
         TodoList todoList = model.getTodoById(id);
         List<ListItem> listItems = todoList.getListItems();
         LinearLayout detailsContainer = (LinearLayout) activity.findViewById(R.id.details_container);
-
+        detailsContainer.removeAllViews();
         LinearLayout listDetailsHeader = (LinearLayout) View.inflate(activity.getBaseContext(),
                 R.layout.list_details_header, null);
         TextView listTitle = (TextView) listDetailsHeader.findViewById(R.id.list_name);
@@ -73,6 +76,5 @@ public class ListDetailsView {
         shareButton = (Button) listDetailsBottom.findViewById(R.id.share_button);
         lastChanged.setText("Last changed: " + todoList.getLastChangeString());
         detailsContainer.addView(listDetailsBottom);
-
     }
 }

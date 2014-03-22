@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -24,6 +23,10 @@ public class ListDetailsViewController implements OnClickListener {
 
     public ListDetailsViewController(ListDetailsView view) {
         this.view = view;
+//        update();
+    }
+
+    public void update() {
         for (CheckBox checkBox: view.listElements.keySet()) {
             checkBox.setOnClickListener(this);
         }
@@ -58,7 +61,6 @@ public class ListDetailsViewController implements OnClickListener {
             id = params[0];
             checked = params[1];
             URL host = null;
-            InputStream is = null;
             try {
                 host = new URL(view.activity.getString(R.string.host) + "set_checked_status/id=" + id + "&checked=" + checked);
             } catch (MalformedURLException e) {

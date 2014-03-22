@@ -26,6 +26,13 @@ public class ListDetailsActivity extends Activity {
         listDetailsViewController = new ListDetailsViewController(listDetailsView);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listDetailsView.update();
+        listDetailsViewController.update();
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -67,6 +67,7 @@ public class ListOverviewView {
                 checkBox.setClickable(false);
                 itemCount++;
             }
+
             overviewTitleElements.put(listOverviewTitle, todoList.getId());
         }
 

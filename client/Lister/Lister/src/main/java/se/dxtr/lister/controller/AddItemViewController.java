@@ -29,7 +29,9 @@ public class AddItemViewController implements OnClickListener {
     @Override
     public void onClick(View v) {
         content = view.taskField.getText().toString();
-        new AddListitemTask().execute(content);
+        if (!content.equals("")){
+            new AddListitemTask().execute(content);
+        }
     }
 
     private class AddListitemTask extends AsyncTask<String, Void, String> {

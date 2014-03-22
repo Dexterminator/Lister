@@ -7,12 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Observable;
 
 /**
  * Created by Dexter on 2014-03-19.
  */
-public class ListerModel extends Observable {
+public class ListerModel {
     private List<TodoList> todoLists;
     private User loggedInUser;
 

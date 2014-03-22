@@ -43,7 +43,7 @@ INSERT INTO users (name, password) VALUES ('qwe', 'qwe');
 INSERT INTO users (name, password) VALUES ('Annica', 'ilovecats');
 INSERT INTO users (name, password) VALUES ('Francis', 'power');
 
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Party shopping', 1, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Groceries', 1, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Packing list', 1, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Cleaning', 1, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Beefcake workout', 2, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
