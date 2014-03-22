@@ -2,13 +2,14 @@ package se.dxtr.lister.model;
 
 import android.util.Log;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
 
 /**
  * Created by Dexter on 2014-03-19.
@@ -66,6 +67,10 @@ public class TodoList {
 
     public void addCollaborator(User user) {
         collaborators.add(user);
+    }
+
+    public void setLastChange(Date lastChange) {
+        this.lastChange = lastChange;
     }
 
     @Override

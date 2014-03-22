@@ -151,6 +151,9 @@ class TodoRequestHandler(BaseHTTPRequestHandler):
 
         set_checked_query = "UPDATE list_items SET checked = %s WHERE id = %s"
         cursor.execute(set_checked_query, (checked, list_item_id))
+        update_changed_query = "UPDATE lists SET last_change = NULL WHERE id IN (SELECT list_id " \
+                               "FROM list_items WHERE id = %s)"
+        cursor.execute(update_changed_query, (list_item_id,))
         cnx.commit()
         cursor.close()
         cnx.close()

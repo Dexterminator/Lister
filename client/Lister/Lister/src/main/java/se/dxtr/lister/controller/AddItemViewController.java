@@ -9,6 +9,7 @@ import android.widget.Toast;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
 import se.dxtr.lister.R;
 import se.dxtr.lister.ResponseReader;
@@ -63,6 +64,7 @@ public class AddItemViewController implements OnClickListener {
                 TodoList todoList = view.model.getTodoById(view.id);
                 ListItem item = new ListItem(Integer.parseInt(response.replace("\n", "")), false, content);
                 todoList.addListItem(item);
+                todoList.setLastChange(new Date());
                 view.activity.finish();
             }
         }

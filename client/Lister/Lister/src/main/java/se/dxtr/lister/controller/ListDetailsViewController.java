@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 
 import se.dxtr.lister.AddItemActivity;
 import se.dxtr.lister.ManageCollaboratorsActivity;
@@ -74,6 +75,9 @@ public class ListDetailsViewController implements OnClickListener {
             Log.d("Checked response", response);
             TodoList todoList = view.model.getTodoById(view.id);
             todoList.getListItemById(Integer.parseInt(id)).setChecked(Boolean.parseBoolean(checked));
+            todoList.setLastChange(new Date());
+            view.update();
+            update();
         }
     }
 }
