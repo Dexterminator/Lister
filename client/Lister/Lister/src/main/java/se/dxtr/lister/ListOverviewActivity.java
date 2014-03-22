@@ -25,6 +25,12 @@ public class ListOverviewActivity extends Activity {
         listOverviewViewController = new ListOverviewViewController(listOverviewView);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listOverviewView.update();
+        listOverviewViewController.update();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

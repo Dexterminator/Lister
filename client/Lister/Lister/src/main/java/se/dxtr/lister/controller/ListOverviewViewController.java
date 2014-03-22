@@ -17,8 +17,9 @@ public class ListOverviewViewController implements OnClickListener {
 
     public ListOverviewViewController(ListOverviewView view) {
         this.view = view;
+    }
 
-        //TODO Somehow make listeners for each list
+    public void update() {
         for (LinearLayout element : view.overviewTitleElements.keySet()) {
             element.setOnClickListener(this);
 

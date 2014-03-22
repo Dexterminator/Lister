@@ -32,12 +32,16 @@ public class ListOverviewView {
         this.overviewTitleElements = new HashMap<LinearLayout, Integer>();
 
         // Setup the rest of the view layout
-        newListButton = (Button)  activity.findViewById(R.id.new_list_button);
+        newListButton = (Button) activity.findViewById(R.id.new_list_button);
+    }
+
+    public void update() {
         List<TodoList> todoLists = model.getTodoLists();
         LinearLayout overviewContainer = (LinearLayout) activity.findViewById(R.id.overview_container);
+        overviewContainer.removeAllViews();
 
         for (TodoList todoList : todoLists) {
-            LinearLayout listOverviewTitle= (LinearLayout) View.inflate(activity.getBaseContext(),
+            LinearLayout listOverviewTitle = (LinearLayout) View.inflate(activity.getBaseContext(),
                     R.layout.list_overview_title, null);
             TextView listTitle = (TextView) listOverviewTitle.findViewById(R.id.list_title);
             listTitle.setText(todoList.getTitle());
@@ -70,7 +74,6 @@ public class ListOverviewView {
 
             overviewTitleElements.put(listOverviewTitle, todoList.getId());
         }
-
     }
 
 }
