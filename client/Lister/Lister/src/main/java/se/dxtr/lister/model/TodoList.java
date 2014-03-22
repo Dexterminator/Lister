@@ -114,6 +114,9 @@ public class TodoList {
     }
 
     public int getDaysUntilDeadline() {
+        if (deadline == null){
+            return Integer.MAX_VALUE;
+        }
         Date deadline = getDeadline();
         Calendar cal = Calendar.getInstance();
         cal.setTime(deadline);
