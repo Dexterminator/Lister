@@ -46,11 +46,7 @@
         <activity
             android:name="se.dxtr.lister.ManageCollaboratorsActivity"
             android:label=""
-            android:parentActivityName="se.dxtr.lister.ListDetailsActivity"
-            android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ListDetailsActivity" />
+            android:screenOrientation="portrait" >q
         </activity>
         <activity
             android:name="se.dxtr.lister.AddCollaboratorActivity"
