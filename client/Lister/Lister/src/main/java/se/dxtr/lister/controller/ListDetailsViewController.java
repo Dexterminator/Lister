@@ -18,7 +18,7 @@ import se.dxtr.lister.ResponseReader;
 import se.dxtr.lister.model.TodoList;
 import se.dxtr.lister.view.ListDetailsView;
 
-public class ListDetailsViewController implements OnClickListener {
+public class ListDetailsViewController implements OnClickListener, View.OnLongClickListener {
     public final static String LIST_ID = "se.dxtr.lister.LIST_ID";
     ListDetailsView view;
 
@@ -29,6 +29,7 @@ public class ListDetailsViewController implements OnClickListener {
     public void update() {
         for (CheckBox checkBox: view.listElements.keySet()) {
             checkBox.setOnClickListener(this);
+            checkBox.setOnLongClickListener(this);
         }
         view.shareButton.setOnClickListener(this);
         view.newItemButton.setOnClickListener(this);
@@ -52,6 +53,15 @@ public class ListDetailsViewController implements OnClickListener {
         }
 
     }
+
+    @Override
+    public boolean onLongClick(View v) {
+        String id = String.valueOf(view.listElements.get(v));
+        Log.d("Long pressed id", String.valueOf(id));
+        new RemoveItemTask().execute(String.valueOf(id));
+        return true;
+    }
+
     private class CheckItemTask extends AsyncTask<String, Void, String> {
         String id;
         String checked;
@@ -76,6 +86,32 @@ public class ListDetailsViewController implements OnClickListener {
             todoList.getListItemById(Integer.parseInt(id)).setChecked(Boolean.parseBoolean(checked));
             todoList.setLastChange(new Date());
             view.lastChanged.setText("Last changed: " + todoList.getLastChangeString());
+        }
+    }
+
+    private class RemoveItemTask extends AsyncTask<String, Void, String> {
+        String id;
+
+        @Override
+        protected String doInBackground(String... params) {
+            id = params[0];
+            URL host = null;
+            try {
+                host = new URL(view.activity.getString(R.string.host) + "remove_list_item/id=" + id);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            return ResponseReader.getResponse(host);
+        }
+
+        @Override
+        protected void onPostExecute(String response) {
+            Log.d("Removed response", response);
+            TodoList todoList = view.model.getTodoById(view.id);
+            todoList.removeListItem(todoList.getListItemById(Integer.parseInt(id)));
+            view.lastChanged.setText("Last changed: " + todoList.getLastChangeString());
+            view.update();
+            update();
         }
     }
 }

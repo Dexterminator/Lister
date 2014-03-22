@@ -73,6 +73,10 @@ public class TodoList {
         this.lastChange = lastChange;
     }
 
+    public void removeListItem(ListItem listItem) {
+        listItems.remove(listItem);
+    }
+
     @Override
     public String toString() {
         return "TodoList{" +
