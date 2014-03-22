@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="5dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,13 +19,20 @@
             android:textSize="30dp"
             android:paddingTop="3dp"
             android:paddingBottom="4dp"
-            android:paddingRight="80dp"/>
+            android:paddingRight="30dp"/>
+
+        <Button
+            style="@style/NewItemButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Sync"
+            android:id="@+id/sync_button"/>
 
         <Button
             style="@style/NewListButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="right"
             android:text="+New list"
             android:id="@+id/new_list_button"/>
 
