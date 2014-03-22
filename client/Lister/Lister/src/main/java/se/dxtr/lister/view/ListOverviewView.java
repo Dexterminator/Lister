@@ -18,10 +18,11 @@ import se.dxtr.lister.model.TodoList;
 
 public class ListOverviewView {
     View view;
-    ListerModel model;
+    public ListerModel model;
     public final Activity activity;
     public Map<LinearLayout, Integer> overviewTitleElements;
     public Button newListButton;
+    public Button syncButton;
 
     public ListOverviewView(View view, ListerModel model, final Activity activity) {
 
@@ -33,6 +34,7 @@ public class ListOverviewView {
 
         // Setup the rest of the view layout
         newListButton = (Button) activity.findViewById(R.id.new_list_button);
+        syncButton = (Button) activity.findViewById(R.id.sync_button);
     }
 
     public void update() {
