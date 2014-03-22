@@ -20,11 +20,13 @@ import se.dxtr.lister.model.TodoList;
 
 public class ListOverviewView {
     View view;
+    boolean deadlineWarningPosted = false;
     public ListerModel model;
     public final Activity activity;
     public Map<LinearLayout, Integer> overviewTitleElements;
     public Button newListButton;
     public Button syncButton;
+
 
     public ListOverviewView(View view, ListerModel model, final Activity activity) {
 
@@ -82,7 +84,8 @@ public class ListOverviewView {
         }
 
         // Post message if any list is near deadline.
-        if (nearDeadlineCount > 0) {
+        if (nearDeadlineCount > 0 && !deadlineWarningPosted) {
+            deadlineWarningPosted = true;
             Context context = activity.getApplicationContext();
             CharSequence text = "You have " + nearDeadlineCount + " todo's near deadline!";
             int duration = Toast.LENGTH_LONG;
