@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="se.dxtr.lister.MainActivity"
-            android:label="Lister"
+            android:label=""
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
         </activity>
         <activity
             android:name="se.dxtr.lister.CreateAccountActivity"
-            android:label="Create account"
+            android:label=""
             android:parentActivityName="se.dxtr.lister.MainActivity"
             android:screenOrientation="portrait" >
             <meta-data
@@ -59,11 +59,11 @@
         </activity>
         <activity
             android:name="se.dxtr.lister.AddListActivity"
-            android:label="@string/title_activity_add_list" >
+            android:label="" >
         </activity>
         <activity
             android:name="se.dxtr.lister.AddItemActivity"
-            android:label="@string/title_activity_add_item" >
+            android:label="" >
         </activity>
     </application>
 
