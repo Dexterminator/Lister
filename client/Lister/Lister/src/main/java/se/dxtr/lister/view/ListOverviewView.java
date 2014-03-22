@@ -66,7 +66,7 @@ public class ListOverviewView {
                     break;
                 }
                 CheckBox checkBox = (CheckBox) View.inflate(activity.getBaseContext(),
-                        R.layout.list_element, null);
+                        R.layout.faded_list_element, null);
                 checkBox.setText(listItem.getContent());
                 checkBox.setChecked(listItem.isChecked());
                 overviewElement.addView(checkBox, overviewElement.getChildCount()-2);
