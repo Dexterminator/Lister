@@ -30,6 +30,9 @@ public class ManageCollaboratorsView {
         id = intent.getIntExtra(ListDetailsViewController.LIST_ID, 0);
 
         manageCollaboratorsButton = (Button) activity.findViewById(R.id.manage_collaborators_button);
+        if (model.getLoggedInUser().getId() != model.getTodoById(id).getAuthor()){
+            manageCollaboratorsButton.setEnabled(false);
+        }
     }
 
     public void update() {
