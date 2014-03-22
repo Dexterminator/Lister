@@ -24,7 +24,6 @@ public class ListDetailsViewController implements OnClickListener {
 
     public ListDetailsViewController(ListDetailsView view) {
         this.view = view;
-//        update();
     }
 
     public void update() {
@@ -76,8 +75,7 @@ public class ListDetailsViewController implements OnClickListener {
             TodoList todoList = view.model.getTodoById(view.id);
             todoList.getListItemById(Integer.parseInt(id)).setChecked(Boolean.parseBoolean(checked));
             todoList.setLastChange(new Date());
-            view.update();
-            update();
+            view.lastChanged.setText("Last changed: " + todoList.getLastChangeString());
         }
     }
 }
