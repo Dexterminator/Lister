@@ -1,11 +1,13 @@
 package se.dxtr.lister.view;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +43,7 @@ public class ListOverviewView {
         List<TodoList> todoLists = model.getTodoLists();
         LinearLayout overviewContainer = (LinearLayout) activity.findViewById(R.id.overview_container);
         overviewContainer.removeAllViews();
+        int nearDeadlineCount = 0;
 
         for (TodoList todoList : todoLists) {
             LinearLayout listOverviewTitle = (LinearLayout) View.inflate(activity.getBaseContext(),
@@ -54,6 +57,7 @@ public class ListOverviewView {
             // Only show deadline warning if the deadline is close.
             if (todoList.getDaysUntilDeadline() <= 1) {
                 overviewContainer.addView(deadlineWarning);
+                nearDeadlineCount++;
             }
 
             LinearLayout overviewElement = (LinearLayout) View.inflate(activity.getBaseContext(),
@@ -75,6 +79,16 @@ public class ListOverviewView {
             }
 
             overviewTitleElements.put(listOverviewTitle, todoList.getId());
+        }
+
+        // Post message if any list is near deadline.
+        if (nearDeadlineCount > 0) {
+            Context context = activity.getApplicationContext();
+            CharSequence text = "You have " + nearDeadlineCount + " todo's near deadline!";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
     }
 
