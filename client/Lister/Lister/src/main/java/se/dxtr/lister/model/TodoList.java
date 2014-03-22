@@ -1,10 +1,14 @@
 package se.dxtr.lister.model;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 /**
  * Created by Dexter on 2014-03-19.
@@ -104,12 +108,17 @@ public class TodoList {
         return sdf.format(dateOfDeadline);
     }
 
-    public int getWarning() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd");
+    public int getDaysUntilDeadline() {
+        Date deadline = getDeadline();
         Calendar cal = Calendar.getInstance();
-        int dateOfDeadline = Integer.parseInt(sdf.format(getDeadline()));
-        int today = Integer.parseInt(sdf.format(cal.getTime()));
-        return dateOfDeadline - today;
+        cal.setTime(deadline);
+
+        DateTime dt = new DateTime(cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH)+1, cal.get(Calendar.DAY_OF_MONTH), 0, 0);
+
+        int difference = Days.daysBetween(DateTime.now(), dt).getDays();
+        Log.d("Day difference: ", String.valueOf(difference));
+        return difference;
     }
 
     public ListItem getListItemById(int id) {
