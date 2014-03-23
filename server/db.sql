@@ -1,15 +1,15 @@
 #mysql --host=mysql-vt2013.csc.kth.se  --user=dexteradmin --password=B3E2RaX5
 -- select * from lists where id IN (SELECT list_id FROM collaborators WHERE uid=3);
-use dexter; # Byt till din egen
+use dexter;
 
-drop table users; # Radera om redan finns
+drop table users;
 drop table lists;
 drop table list_items;
 drop table collaborators;
 
 create table users (
 	id int NOT NULL AUTO_INCREMENT,
-    name varchar(64),
+    name UNIQUE varchar(64),
     password varchar(64),
 	PRIMARY KEY (id)
 );
@@ -43,11 +43,11 @@ INSERT INTO users (name, password) VALUES ('qwe', 'qwe');
 INSERT INTO users (name, password) VALUES ('Annica', 'ilovecats');
 INSERT INTO users (name, password) VALUES ('Francis', 'power');
 
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Groceries', 1, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Packing list', 1, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Cleaning', 1, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Beefcake workout', 2, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Become president', 3, '2014-01-01 00:00:01', '2015-01-01 00:00:01');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Groceries', 1, '2014-01-01 00:00:01', '2014-03-24 00:00:00');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Packing list', 1, '2014-01-01 00:00:01', '2014-03-28 00:00:00');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Cleaning', 1, '2014-01-01 00:00:01', '2014-03-26 00:00:00');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Beefcake workout', 2, '2014-01-01 00:00:01', '2014-03-28 00:00:00');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Become president', 3, '2014-01-01 00:00:01', '2014-03-24 00:00:00');
 
 INSERT INTO list_items (list_id, content, checked) VALUES (1, 'eggs', false);
 INSERT INTO list_items (list_id, content, checked) VALUES (1, 'milk', false);
