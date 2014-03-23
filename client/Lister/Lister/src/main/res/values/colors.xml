@@ -17,4 +17,5 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
     <color name="logo_color">#04859D</color>
+    <color name="button_color">#FF9F40</color>
 </resources>
