@@ -2,6 +2,7 @@ package se.dxtr.lister.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -54,6 +55,10 @@ public class ListDetailsView {
         listTitle.setText(todoList.getTitle());
         deadline.setText("Deadline " + todoList.getDeadlineString());
         detailsContainer.addView(listDetailsHeader);
+
+        if (todoList.getDaysUntilDeadline() <= 1) {
+            deadline.setTextColor(Color.RED);
+        }
 
         LinearLayout itemsContainer = (LinearLayout) View.inflate(activity.getBaseContext(),
                 R.layout.list_details_content, null);

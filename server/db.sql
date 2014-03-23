@@ -43,10 +43,10 @@ INSERT INTO users (name, password) VALUES ('qwe', 'qwe');
 INSERT INTO users (name, password) VALUES ('Annica', 'ilovecats');
 INSERT INTO users (name, password) VALUES ('Francis', 'power');
 
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Groceries', 1, '2014-01-01 00:00:01', '2014-03-24 00:00:00');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Groceries', 1, '2014-01-01 00:00:01', '2014-03-25 00:00:00');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Packing list', 1, '2014-01-01 00:00:01', '2014-03-28 00:00:00');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Cleaning', 1, '2014-01-01 00:00:01', '2014-03-23 00:00:00');
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Beefcake workout', 2, '2014-01-01 00:00:01', '2014-03-28 00:00:00');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Beefcake workout', 2, '2014-01-01 00:00:01', '2014-03-30 00:00:00');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Become president', 3, '2014-01-01 00:00:01', '2014-03-24 00:00:00');
 
 INSERT INTO list_items (list_id, content, checked) VALUES (1, 'eggs', false);

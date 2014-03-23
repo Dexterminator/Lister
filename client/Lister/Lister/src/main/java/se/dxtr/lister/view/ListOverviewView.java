@@ -2,6 +2,7 @@ package se.dxtr.lister.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -51,13 +52,11 @@ public class ListOverviewView {
                     R.layout.list_overview_title, null);
             TextView listTitle = (TextView) listOverviewTitle.findViewById(R.id.list_title);
             listTitle.setText(todoList.getTitle());
-            LinearLayout deadlineWarning = (LinearLayout) View.inflate(activity.getBaseContext(),
-                    R.layout.deadline_warning, null);
             overviewContainer.addView(listOverviewTitle);
 
             // Only show deadline warning if the deadline is close.
             if (todoList.getDaysUntilDeadline() <= 1) {
-                overviewContainer.addView(deadlineWarning);
+                listTitle.setTextColor(Color.RED);
                 nearDeadlineCount++;
             }
 
