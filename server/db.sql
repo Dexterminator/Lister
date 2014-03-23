@@ -9,7 +9,7 @@ drop table collaborators;
 
 create table users (
 	id int NOT NULL AUTO_INCREMENT,
-    name UNIQUE varchar(64),
+    name varchar(64) UNIQUE,
     password varchar(64),
 	PRIMARY KEY (id)
 );
@@ -45,7 +45,7 @@ INSERT INTO users (name, password) VALUES ('Francis', 'power');
 
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Groceries', 1, '2014-01-01 00:00:01', '2014-03-24 00:00:00');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Packing list', 1, '2014-01-01 00:00:01', '2014-03-28 00:00:00');
-INSERT INTO lists (title, author, last_change, deadline) VALUES ('Cleaning', 1, '2014-01-01 00:00:01', '2014-03-26 00:00:00');
+INSERT INTO lists (title, author, last_change, deadline) VALUES ('Cleaning', 1, '2014-01-01 00:00:01', '2014-03-23 00:00:00');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Beefcake workout', 2, '2014-01-01 00:00:01', '2014-03-28 00:00:00');
 INSERT INTO lists (title, author, last_change, deadline) VALUES ('Become president', 3, '2014-01-01 00:00:01', '2014-03-24 00:00:00');
 
