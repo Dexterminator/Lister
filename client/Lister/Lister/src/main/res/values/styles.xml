@@ -8,10 +8,11 @@
     <style name="LoginButtonStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:width">150dp</item>
+        <item name="android:width">120dp</item>
         <item name="android:textSize">20sp</item>
-        <!-- <item name="android:background">#AB2F44</item> -->
+         <item name="android:background">#FF9F40</item>
         <item name="android:textColor">#000000</item>
+
     </style>
 
     <style name="CreateAccountButtonStyle" parent="@android:style/Widget.Button">
@@ -19,7 +20,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:width">175dp</item>
         <item name="android:textSize">15sp</item>
-        <!-- <item name="android:background">#AB2F44</item> -->
+         <item name="android:background">#FF7F00</item>
         <item name="android:textColor">#000000</item>
     </style>
 
@@ -60,7 +61,7 @@
     <style name="ListerLogo" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">40sp</item>
+        <item name="android:textSize">45sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#04859D</item>
         <item name="android:typeface">sans</item>
