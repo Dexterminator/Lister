@@ -27,7 +27,6 @@ public class ListOverviewView {
     public Button newListButton;
     public Button syncButton;
 
-
     public ListOverviewView(View view, ListerModel model, final Activity activity) {
 
         // store in the class the reference to the Android View

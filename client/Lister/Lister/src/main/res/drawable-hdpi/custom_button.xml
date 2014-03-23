@@ -8,11 +8,6 @@
                android:color="#FF7F00"/>
             <corners
                 android:radius="3dp" />
-            <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
         </shape>
     </item>
 
@@ -20,14 +15,8 @@
         <shape>
             <solid
                 android:color="@color/button_color"/>
-                android:angle="270" />
             <corners
                 android:radius="3dp" />
-            <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
         </shape>
     </item>
 
@@ -35,14 +24,8 @@
         <shape>
             <solid
                 android:color="@color/button_color"/>
-                android:angle="270" />
             <corners
                 android:radius="3dp" />
-            <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp" />
         </shape>
     </item>
 </selector>

@@ -10,17 +10,16 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:width">120dp</item>
         <item name="android:textSize">20sp</item>
-         <item name="android:background">@drawable/custom_button</item>
+        <item name="android:background">@drawable/custom_button</item>
         <item name="android:textColor">#000000</item>
-
     </style>
 
     <style name="CreateAccountButtonStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:width">175dp</item>
-        <item name="android:textSize">15sp</item>
-         <item name="android:background">#FF7F00</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:background">@drawable/custom_button</item>
         <item name="android:textColor">#000000</item>
     </style>
 
@@ -29,15 +28,25 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:width">100dp</item>
         <item name="android:textSize">20sp</item>
-        <!-- <item name="android:background">#AB2F44</item> -->
+        <item name="android:background">@drawable/custom_button</item>
         <item name="android:textColor">#000000</item>
     </style>
 
     <style name="NewListButtonStyle" parent="@android:style/Widget.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:width">100dp</item>
         <item name="android:textSize">20sp</item>
-        <!-- <item name="android:background">#AB2F44</item> -->
+        <item name="android:background">@drawable/custom_button</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="SyncButtonStyle" parent="@android:style/Widget.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:width">75dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:background">@drawable/custom_button</item>
         <item name="android:textColor">#000000</item>
     </style>
 
@@ -45,7 +54,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
-        <!-- <item name="android:background">#AB2F44</item> -->
+        <item name="android:background">@drawable/custom_button</item>
         <item name="android:textColor">#000000</item>
     </style>
 
@@ -54,7 +63,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:width">200dp</item>
         <item name="android:textSize">20sp</item>
-        <!-- <item name="android:background">#AB2F44</item> -->
+        <item name="android:background">@drawable/custom_button</item>
         <item name="android:textColor">#000000</item>
     </style>
 
