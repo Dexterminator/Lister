@@ -2,6 +2,7 @@ package se.dxtr.lister.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,6 +33,8 @@ public class ManageCollaboratorsView {
         manageCollaboratorsButton = (Button) activity.findViewById(R.id.manage_collaborators_button);
         if (model.getLoggedInUser().getId() != model.getTodoById(id).getAuthor()){
             manageCollaboratorsButton.setEnabled(false);
+            manageCollaboratorsButton.setBackgroundColor(Color.GRAY);
+            manageCollaboratorsButton.setAlpha(0.3f);
         }
     }
 
